@@ -1,6 +1,9 @@
 const Privado = require('../models/perfil_privado')
 //create, updte and delete solo los administradores
 
+
+//ADMINS
+
 async function getAllPerfilesPrivados(req, res) {
     try {
         const privado = await Privado.findAll({ where: req.query })
@@ -92,6 +95,23 @@ async function updateUserPerfilPrivado(req, res) {
     }
 }
 
+async function deleteUserPerfilPrivado(req, res) {
+    try {
+        const privado = await Privado.destroy({
+            where: {
+                id: res.locals.privado.id,
+            },
+        })
+        if (privado) {
+            return res.status(200).json('Perfil borrado')
+        } else {
+            return res.status(404).send('Perfil no encontrado')
+        }
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
+
 
 
 module.exports = {
@@ -100,6 +120,7 @@ module.exports = {
     createPerfilPrivado,
     updatePerfilPrivado,
     deletePerfilPrivado,
-    updateUserPerfilPrivado
+    updateUserPerfilPrivado,
+    deleteUserPerfilPrivado
 }   
 
