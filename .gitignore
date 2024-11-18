@@ -1,1 +1,5 @@
 node_modules/
+.env
+/api/controllers/template.js
+/api/models/template.js
+/api/routes/template.js
