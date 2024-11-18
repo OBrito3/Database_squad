@@ -29,7 +29,7 @@ const login = async (req, res) => {
 
         if (comparePass) {
             const payload = { email: privado.email };
-            const token = jwt.sign(payload, process.env.TOKEN_WORD, { expiresIn: "1h" });
+            const token = jwt.sign(payload, process.env.TOKEN_WORD, { expiresIn: process.env.EXPIRES });
             return res.status(200).json({ token, role: privado.role });
         } else {
             return res.status(404).send("Error: comprueba los datos introducidos");

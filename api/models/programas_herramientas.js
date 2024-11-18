@@ -1,3 +1,4 @@
+/*
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
@@ -34,3 +35,4 @@ const Pro_Herr = sequelize.define(
 )
 
 module.exports = Pro_Herr
+*/

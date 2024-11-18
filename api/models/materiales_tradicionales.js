@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
 const Material = sequelize.define(
-    'material',
+    'materiales',
     {
         nombre: {
             type: DataTypes.STRING,

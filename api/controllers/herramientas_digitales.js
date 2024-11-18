@@ -1,6 +1,9 @@
 const Herramienta = require('../models/herramientas_digitales')
 //create, updte and delete solo los administradores
 
+
+//ADMINS
+
 async function getAllHerramientas(req, res) {
     try {
         const herramientas = await Herramienta.findAll({ where: req.query })
@@ -71,11 +74,12 @@ async function deleteHerramienta(req, res) {
     }
 }
 
+
 module.exports = {
     getAllHerramientas,
     getOneHerramienta,
     createHerramienta,
     updateHerramienta,
-    deleteHerramienta
+    deleteHerramienta,
 }   
 

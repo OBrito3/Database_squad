@@ -17,6 +17,7 @@ const Privado = sequelize.define(
                 }
             },
             unique: true,
+            allowNull: false,
         },
 
         password: {

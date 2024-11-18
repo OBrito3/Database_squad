@@ -15,7 +15,7 @@ router.delete('/:id', checkAuth, checkAdmin, deletePerfilPrivado)
 //USERS
 
 router.put('/privado/:id', checkAuth, updateUserPerfilPrivado)
-router.delete('/privado/:id', checkAuth, deletePerfilPrivado)
+router.delete('/privado/:id', checkAuth, deleteUserPerfilPrivado)
 
 
 

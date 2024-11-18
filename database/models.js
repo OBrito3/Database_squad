@@ -20,6 +20,7 @@ function addRelationsToModels() {
         Publicacion.belongsTo(Publico, { onDelete: 'CASCADE', onUpdate: 'CASCADE' }) 
         Publico.hasMany(Publicacion)
 
+        /*
         Pro_Herr.belongsTo(Metodo, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
         Metodo.hasMany(Pro_Herr)
 
@@ -27,9 +28,11 @@ function addRelationsToModels() {
         Programa.belongsToMany(Herramienta, { through: 'programas_herramientas', timestamps: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
         Herramienta.belongsToMany(Programa, { through: 'programas_herramientas', timestamps: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
 
+        */
+       
         // One to One
-        Publico.hasOne(Privado, {onDelete: 'CASCADE', onUpdate: 'CASCADE'}) //ESTAR PENDIENTE AL ID DE PRIVADO
-        Privado.belongsTo(Publico)
+        Privado.hasOne(Publico, {onDelete: 'CASCADE', onUpdate: 'CASCADE'}) //ESTAR PENDIENTE AL ID DE PRIVADO
+        Publico.belongsTo(Privado)
 
         console.log('Relations added to all models')
     } catch (error) {

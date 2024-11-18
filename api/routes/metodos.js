@@ -1,11 +1,12 @@
 const router = require('express').Router()
 
+const { checkAuth, checkAdmin } = require("../middlewares/auth");
 const { getAllMetodos, getOneMetodo, createMetodo, updateMetodo, deleteMetodo } = require('../controllers/metodos')
 
 router.get('/', getAllMetodos)
 router.get('/:id', getOneMetodo)
-router.post('/', createMetodo)
-router.put('/:id', updateMetodo)
-router.delete('/:id', deleteMetodo)
+router.post('/', checkAuth, checkAdmin, createMetodo)
+router.put('/:id', checkAuth, checkAdmin, updateMetodo)
+router.delete('/:id', checkAuth, checkAdmin, deleteMetodo)
 
 module.exports = router

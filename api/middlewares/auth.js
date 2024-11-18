@@ -7,7 +7,7 @@ const checkAuth = async (req, res, next) => {
             return res.status(404).send("Token no encontrado");
         }
 
-        jwt.verify(req.headers.authorization, "isasecret", async (err, result) => {
+        jwt.verify(req.headers.authorization, TOKEN_WORD, async (err, result) => {
             if (err) return res.status(401).send("Token no válido");
             const privado = await Privado.findOne({
                 where: { email: result.email },

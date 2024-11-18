@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
 const Herramienta = sequelize.define(
-    'herramienta',
+    'herramientas',
     {
         nombre: {
             type: DataTypes.STRING,

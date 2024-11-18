@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
 const Publicacion = sequelize.define(
-    'publicacion',
+    'publicaciones',
     {
         contenido: {
             type: DataTypes.TEXT,

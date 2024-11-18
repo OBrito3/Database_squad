@@ -1,6 +1,8 @@
 const Publicacion = require('../models/publicaciones')
 //create, updte and delete solo los administradores
 
+
+//ADMINS
 async function getAllPublicaciones(req, res) {
     try {
         const publicaciones = await Publicacion.findAll({ where: req.query })
@@ -71,11 +73,63 @@ async function deletePublicacion(req, res) {
     }
 }
 
+//USERS
+async function createUserPublicacion(req, res) {
+    try {
+        const publicacion = await Publicacion.create(req.body, {
+            where: {
+                id: res.locals.privado.id,
+            }
+        })
+        return res.status(200).json({ message: 'Publicación creada', publicación: publicacion })
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
+
+async function updateUserPublicacion(req, res) {
+    try {
+        const [publicacionExist, publicacion] = await Publicacion.update(req.body, {
+            returning: true,
+            where: {
+                id: res.locals.privado.id,
+            },
+        })
+        if (publicacionExist !== 0) {
+            return res.status(200).json({ message: 'Publicación actualizada', publicación: publicacion })
+        } else {
+            return res.status(404).send('Publicación no encontrada')
+        }
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
+
+async function deleteUserPublicacion(req, res) {
+    try {
+        const publicacion = await Publicacion.destroy({
+            where: {
+                id: res.locals.privado.id,
+            },
+        })
+        if (publicacion) {
+            return res.status(200).json('Publicación borrada')
+        } else {
+            return res.status(404).send('Publicación no encontrada')
+        }
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
+
 module.exports = {
     getAllPublicaciones,
     getOnePublicacion,
     createPublicacion,
     updatePublicacion,
-    deletePublicacion
+    deletePublicacion,
+    createUserPublicacion,
+    updateUserPublicacion,
+    deleteUserPublicacion
 }
    

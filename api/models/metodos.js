@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
 const Metodo = sequelize.define(
-    'metodo',
+    'metodos',
     {
         metodo: {
             type: DataTypes.ENUM('tradicional', 'digital'),
