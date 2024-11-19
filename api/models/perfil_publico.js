@@ -6,7 +6,7 @@ const Publico = sequelize.define(
     {
         nombre_usuario: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             unique: true,
         },
 
@@ -17,7 +17,7 @@ const Publico = sequelize.define(
 
         descripcion: {
             type: DataTypes.TEXT,
-            allowNull: false,
+            allowNull: true,
         },
         
         rol:{

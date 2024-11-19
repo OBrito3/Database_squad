@@ -1,3 +1,6 @@
+CREATE database ASN;
+USE ASN;
+
 INSERT INTO metodos (metodo, categoria_artistica) VALUES
 ('tradicional', 'ilustración'),
 ('tradicional', 'escultura'),
@@ -88,51 +91,54 @@ INSERT INTO herramientas (nombre, descripcion, marca) VALUES
 ('Logitech Pen', 'Lápiz óptico ergonómico.', 'Logitech'),
 ('Gaomon PD1560', 'Pantalla gráfica para diseño digital.', 'Gaomon');
 
-
-
 INSERT INTO privados (nombre, email, password, fecha_registro, role) VALUES
-('Claudia', 'Claudia@example.com', 'password123', '2024-01-01', 'artista'),
-('Pepe', 'pepe@example.com', 'password123', '2024-01-02', 'usuario'),
-('Maria', 'maria@example.com', 'password123', '2024-01-03', 'usuario'),
-('Carlos', 'carlos@example.com', 'password123', '2024-01-04', 'admin'),
-('Ana', 'ana@example.com', 'password123', '2024-01-05', 'artista'),
-('Luis', 'luis@example.com', 'password123', '2024-01-06', 'usuario'),
-('Sofia', 'sofia@example.com', 'password123', '2024-01-07', 'artista'),
-('Miguel', 'miguel@example.com', 'password123', '2024-01-08', 'usuario'),
-('Julia', 'julia@example.com', 'password123', '2024-01-09', 'artista'),
-('Raul', 'raul@example.com', 'password123', '2024-01-10', 'usuario'),
-('Laura', 'laura@example.com', 'password123', '2024-01-11', 'usuario'),
-('Pedro', 'pedro@example.com', 'password123', '2024-01-12', 'usuario'),
-('Paula', 'paula@example.com', 'password123', '2024-01-13', 'artista'),
-('Javier', 'javier@example.com', 'password123', '2024-01-14', 'admin'),
-('Sara', 'sara@example.com', 'password123', '2024-01-15', 'artista'),
-('Pablo', 'pablo@example.com', 'password123', '2024-01-16', 'usuario'),
-('Nuria', 'nuria@example.com', 'password123', '2024-01-17', 'usuario'),
-('Hector', 'hector@example.com', 'password123', '2024-01-18', 'artista'),
-('Marta', 'marta@example.com', 'password123', '2024-01-19', 'usuario'),
-('Daniel', 'daniel@example.com', 'password123', '2024-01-20', 'admin');
+('Claudia', 'Claudia@example.com', 'password123', '2024-01-01', 'admin');
+
+INSERT INTO usuarios (id, nombre, email, password, fecha_registro, role) VALUES
+(1, 'Marta', 'marta@example.com', '$2b$10$HVIm3JRLYWlKY/R4RmkwMe8D6EM80kaBAwrFWX8t8ksD1oio8V9rq', '2024-11-19 14:07:19', 'usuario'),
+(2, 'Hector', 'hector@example.com', '$2b$10$u7cCa3hbX8JucO1LVGjL5.ECZ/INKqW.C1tHt9WaaBnudcr6NnoZ6', '2024-11-19 14:07:19', 'artista'),
+(3, 'Nuria', 'nuria@example.com', '$2b$10$UZnI7sGMcBS9lK0mvMU22ewQRv9rSeXvixlimsn4F7PJmX220gJ4y', '2024-11-19 14:07:19', 'usuario'),
+(4, 'Pablo', 'pablo@example.com', '$2b$10$31FM33b41bUyAu8UYNGzzuoTy8GxXq2qhHjnNKk7FK5o8BfiGCZ9y', '2024-11-19 14:07:19', 'usuario'),
+(5, 'Sara', 'sara@example.com', '$2b$10$MaXEgCOK6doaS8PPZZaL6epZhP4LnJDZaXoqwPCwoj7TmgTSqujWS', '2024-11-19 14:07:19', 'artista'),
+(6, 'Javier', 'javier@example.com', '$2b$10$7APX.UvF8c9ov1YPuk3qYueXeIaPx9yBBNq/FcVJgiEE.6Ht7QHRO', '2024-11-19 14:07:19', 'admin'),
+(7, 'Paula', 'paula@example.com', '$2b$10$F4hUA0DFR65xe3vdG/4N0ugmPpUbXZOgp8QMDpMrZH8xEQJGr1Gfq', '2024-11-19 14:07:19', 'artista'),
+(8, 'Pedro', 'pedro@example.com', '$2b$10$1KDnKOuU6Tp6sX5ikv5LEuzIbgfJEynE1LzvMw4kJeniPdwPKSI7a', '2024-11-19 14:07:19', 'usuario'),
+(9, 'Laura', 'laura@example.com', '$2b$10$qsxRw/wFpCg03ksh9SzO0OR3hUqLp11dCiyT6ChxsNjNX28pSsf9W', '2024-11-19 14:07:19', 'usuario'),
+(10, 'Claudia', 'claudia@example.com', '$2b$10$X6M3K5NNdWY6/D2o7XSp0u2/7Tus8gPsNSI1GbzGty3Ur0MtQdg9e', '2024-11-19 14:07:19', 'artista'),
+(11, 'Pepe', 'pepe@example.com', '$2b$10$M67cM4YDJv6BsRDeJBGCvefwy1VafBMCD1DmI7Y//5YD6TGtjllTy', '2024-11-19 14:07:19', 'usuario'),
+(12, 'Maria', 'maria@example.com', '$2b$10$luKB35hN.N9diB/KTAfNJuu/e58iQFNCWF89sjDgTnSsGHW7ULtIC', '2024-11-19 14:07:19', 'usuario'),
+(13, 'Carlos', 'carlos@example.com', '$2b$10$J4/JDO6W.AYV5D2lD81wrOik5SfAU.IPD.A3cEZmC8rhW4RXgxxC6', '2024-11-19 14:07:19', 'admin'),
+(14, 'Ana', 'ana@example.com', '$2b$10$vsNNwJRUHOheR55VUiOwX..PIbgXi1NI1I/zm84IorUyqklJDtxbe', '2024-11-19 14:07:19', 'artista'),
+(15, 'Luis', 'luis@example.com', '$2b$10$md7scFhnPvxBU1F23mcsOeJRMDb7vw9EEM4vV4HrZWS1CurrDfzqS', '2024-11-19 14:07:19', 'usuario'),
+(16, 'Sofia', 'sofia@example.com', '$2b$10$x0z0FdkrOEklFwErT76qyesM8F8.4n7QI17GV5631jGTpzWq1u4R.', '2024-11-19 14:07:19', 'artista'),
+(17, 'Miguel', 'miguel@example.com', '$2b$10$Qujwq.6atMKNQiOMup9tQeckrjuCpU11oHkC7qvuLsZLWkGzAGEKi', '2024-11-19 14:07:19', 'usuario'),
+(18, 'Julia', 'julia@example.com', '$2b$10$ygBW.q511Ml0Fj5gDGTxz.NTlXLDHV6uVeXlBDiQ2aIaqWMdi0Way', '2024-11-19 14:07:19', 'artista'),
+(19, 'Raul', 'raul@example.com', '$2b$10$6vD0wrVa57H5eiaf.EuBK.mD3ywjfcoOnBrpMJRbKFfL16UCTh1U2', '2024-11-19 14:07:19', 'usuario'),
+(20, 'Daniel', 'daniel@example.com', '$2b$10$r27ZkX/T41pbzflzPMwiNuPdzCT5bSaGpZClUVStDaUDAHbeBQkzS', '2024-11-19 14:07:19', 'admin');
+
 
 INSERT INTO publicos (id, nombre_usuario, foto, descripcion, rol, privadoId) VALUES
-(1, 'Claudia_Artista', 'Claudia.jpg', 'Artista de ilustración digital y tradicional.', 'artista', 1),
-(2, 'Pepe_U', 'pepe.jpg', 'Explorador de ideas creativas.', 'usuario', 2),
-(3, 'MariaDesign', 'maria.jpg', 'Amante del diseño gráfico.', 'usuario', 3),
-(4, 'CarlosAdmin', 'carlos.jpg', 'Administrador de la red.', 'admin', 4),
-(5, 'AnaArt', 'ana.jpg', 'Escultora apasionada.', 'artista', 5),
-(6, 'LuisUser', 'luis.jpg', 'Principiante en arte digital.', 'usuario', 6),
-(7, 'SofiaPainter', 'sofia.jpg', 'Pintora profesional.', 'artista', 7),
-(8, 'MiguelIdeas', 'miguel.jpg', 'Entusiasta de la creatividad.', 'usuario', 8),
-(9, 'JuliaSculpt', 'julia.jpg', 'Escultora tradicional.', 'artista', 9),
-(10, 'RaulDigital', 'raul.jpg', 'Curioso del modelado 3D.', 'usuario', 10),
-(11, 'LauraSketch', 'laura.jpg', 'Amante de los bocetos rápidos.', 'usuario', 11),
-(12, 'PedroDraw', 'pedro.jpg', 'Dibujante de cómics.', 'usuario', 12),
-(13, 'Paula3D', 'paula.jpg', 'Experta en modelado 3D.', 'artista', 13),
-(14, 'JavierAdmin', 'javier.jpg', 'Administrador y soporte.', 'admin', 14),
-(15, 'SaraIllustrator', 'sara.jpg', 'Ilustradora profesional.', 'artista', 15),
-(16, 'PabloArtFan', 'pablo.jpg', 'Fan del arte.', 'usuario', 16),
-(17, 'NuriaSketcher', 'nuria.jpg', 'Aficionada al dibujo.', 'usuario', 17),
-(18, 'HectorDigital', 'hector.jpg', 'Artista digital emergente.', 'artista', 18),
-(19, 'MartaIdeas', 'marta.jpg', 'Fanática del diseño gráfico.', 'usuario', 19),
+(1, 'MartaIdeas', 'marta.jpg', 'Fanática del diseño gráfico.', 'usuario', 1),
+(2, 'HectorDigital', 'hector.jpg', 'Artista digital emergente.', 'artista', 2),
+(3, 'NuriaSketcher', 'nuria.jpg', 'Aficionada al dibujo.', 'usuario', 3),
+(4, 'PabloArtFan', 'pablo.jpg', 'Fan del arte.', 'usuario', 4),
+(5, 'SaraIllustrator', 'sara.jpg', 'Ilustradora profesional.', 'artista', 5),
+(6, 'JavierAdmin', 'javier.jpg', 'Administrador y soporte.', 'admin', 6),
+(7, 'Paula3D', 'paula.jpg', 'Experta en modelado 3D.', 'artista', 7),
+(8, 'PedroDraw', 'pedro.jpg', 'Dibujante de cómics.', 'usuario', 8),
+(9, 'LauraSketch', 'laura.jpg', 'Amante de los bocetos rápidos.', 'usuario', 9),
+(10, 'Claudia_Artista', 'Claudia.jpg', 'Artista de ilustración digital y tradicional.', 'artista', 10),
+(11, 'Pepe_U', 'pepe.jpg', 'Explorador de ideas creativas.', 'usuario', 11),
+(12, 'MariaDesign', 'maria.jpg', 'Amante del diseño gráfico.', 'usuario', 12),
+(13, 'CarlosAdmin', 'carlos.jpg', 'Administrador de la red.', 'admin', 13),
+(14, 'AnaArt', 'ana.jpg', 'Escultora apasionada.', 'artista', 14),
+(15, 'LuisUser', 'luis.jpg', 'Principiante en arte digital.', 'usuario', 15),
+(16, 'SofiaPainter', 'sofia.jpg', 'Pintora profesional.', 'artista', 16),
+(17, 'MiguelIdeas', 'miguel.jpg', 'Entusiasta de la creatividad.', 'usuario', 17),
+(18, 'JuliaSculpt', 'julia.jpg', 'Escultora tradicional.', 'artista', 18),
+(19, 'RaulDigital', 'raul.jpg', 'Curioso del modelado 3D.', 'usuario', 19),
 (20, 'DanielAdmin', 'daniel.jpg', 'Admin de la red social.', 'admin', 20);
+
 
 
 
@@ -155,28 +161,27 @@ INSERT INTO publicaciones (contenido, fecha_publicacion, categoria, link, metodo
 
 
 
-INSERT INTO programa_herramientas (programas_id, herramientas_id) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7),
-(8, 8),
-(9, 9),
-(10, 10),
-(1, 11),
-(2, 12),
-(3, 13),
-(4, 14),
-(5, 15),
-(6, 16),
-(7, 17),
-(8, 18),
-(9, 19),
-(10, 20);
-
+INSERT INTO pro_herrs (programa_id, herramienta_id, metodo_id) VALUES
+(1, 1, 2),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4,2),
+(5, 5,1),
+(6, 6,1),
+(7, 7, 2),
+(8, 8, 1),
+(9, 9,2),
+(10, 10, 1),
+(1, 11,1),
+(2, 12,1),
+(3, 13,1),
+(4, 14,2),
+(5, 15,1),
+(6, 16,2),
+(7, 17,1),
+(8, 18,1),
+(9, 19,1),
+(10, 20,1);
 
 
 
