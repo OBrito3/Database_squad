@@ -1,4 +1,5 @@
 const Privado = require('../models/perfil_privado')
+const Publico = require('../models/perfil_publico')
 //create, update and delete solo los administradores
 
 

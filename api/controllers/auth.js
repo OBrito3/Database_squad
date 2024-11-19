@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Privado = require("../models/perfil_privado.js");
+const Publico = require("../models/perfil_publico.js");
 
 const signup = async (req, res) => {
     try {
@@ -9,6 +10,8 @@ const signup = async (req, res) => {
         req.body.password = hasedPassword;
 
         const privado = await Privado.create(req.body);
+        const publico = await Publico.create({ privadoId: privado.id })
+
         const payload = { email: req.body.email };
         const token = jwt.sign(payload, process.env.TOKEN_WORD, { expiresIn: process.env.EXPIRES });
         res.status(200).json({ token, role: privado.role, usuario: privado.email });
