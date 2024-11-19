@@ -75,11 +75,14 @@ async function deleteHerramienta(req, res) {
 }
 
 
+
+
 module.exports = {
     getAllHerramientas,
     getOneHerramienta,
     createHerramienta,
     updateHerramienta,
     deleteHerramienta,
+   
 }   
 

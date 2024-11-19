@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-const { checkAuth, checkAdmin } = require("../middlewares/auth");
+const { checkAuth, checkAdmin, checkArtista } = require("../middlewares/auth");
 const { getAllPerfilesPrivados, getOnePerfilPrivado, createPerfilPrivado, updatePerfilPrivado, deletePerfilPrivado, updateUserPerfilPrivado, deleteUserPerfilPrivado } = require('../controllers/perfil_privado')
 
 //ADMINS
@@ -12,7 +12,7 @@ router.put('/:id', checkAuth, checkAdmin, updatePerfilPrivado)
 router.delete('/:id', checkAuth, checkAdmin, deletePerfilPrivado)
 
 
-//USERS
+//USERS Y ARTISTA
 
 router.put('/privado/:id', checkAuth, updateUserPerfilPrivado)
 router.delete('/privado/:id', checkAuth, deleteUserPerfilPrivado)

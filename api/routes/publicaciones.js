@@ -11,9 +11,11 @@ router.put('/:id', checkAuth, checkAdmin, updatePublicacion)
 router.delete('/:id', checkAuth, checkAdmin, deletePublicacion)  
 
 
-//USERS
+//USERS Y ARTISTA
 router.post('/privado/:id', checkAuth, createUserPublicacion)
 router.put('/privado/:id', checkAuth, updateUserPublicacion)
 router.delete('/privado/:id', checkAuth, deleteUserPublicacion)
+
+
 
 module.exports = router
