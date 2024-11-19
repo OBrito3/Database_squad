@@ -1,4 +1,6 @@
 const Publicacion = require('../models/publicaciones')
+const Publico = require('../models/perfil_publico')
+const Metodo = require('../models/metodos')
 
 //ADMINS
 async function getAllPublicaciones(req, res) {
@@ -74,16 +76,37 @@ async function deletePublicacion(req, res) {
 // USUARIOS Y ARTISTAS
 async function createUserPublicacion(req, res) {
     try {
-        const publicacion = await Publicacion.create(req.body, {
-            where: {
-                id: res.locals.privado.id,
-            }
-        })
-        return res.status(200).json({ message: 'Publicación creada', publicación: publicacion })
+        // Primero, buscamos el método correspondiente. Aquí buscamos por el 'metodoId' que puede estar en el cuerpo de la solicitud (req.body)
+       /*  const metodoId = req.body.metodoId; // Esto debe venir en el cuerpo de la solicitud o en la URL, según tu implementación
+
+        if (!metodoId) {
+            return res.status(400).json({ message: 'El metodoId es obligatorio' });
+        }
+
+        // Buscar el metodo con el metodoId proporcionado
+        const metodo = await Metodo.findByPk(metodoId);
+
+        if (!metodo) {
+            return res.status(400).json({ message: 'Método no encontrado' });
+        } */
+
+        // Crear la publicación con el publicoId y metodoId
+        const publicacion = await Publicacion.create({
+            ...req.body, // Incluye el resto de los datos de la publicación
+            publicoId: req.params.publicoId, // 'publicoId' lo tomamos de los parámetros de la URL
+            metodoId: metodo.id // Asignamos el 'metodoId' encontrado
+        });
+
+        console.log(publicacion);
+        console.log(req.params.publicoId);
+
+        return res.status(200).json({ message: 'Publicación creada', publicacion: publicacion });
     } catch (error) {
-        res.status(500).send(error.message)
+        console.error(error);
+        res.status(500).send(error.message);
     }
 }
+
 
 async function updateUserPublicacion(req, res) {
     try {

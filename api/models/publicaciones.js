@@ -11,6 +11,7 @@ const Publicacion = sequelize.define(
         fecha_publicacion: {
             type: DataTypes.DATE,
             allowNull: false,
+            defaultValue: new Date,
         },
         categoria: {
             type: DataTypes.ENUM('tutorial', 'portfolio'),

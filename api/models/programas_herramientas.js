@@ -21,7 +21,7 @@ const Pro_Herr = sequelize.define(
                 model: 'herramientas',
                 key: 'id'   
             }
-        },
+        }/* ,
         metodo_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -29,7 +29,7 @@ const Pro_Herr = sequelize.define(
                 model: 'metodos',
                 key: 'id'
             }
-        }
+        } */
     },
     { timestamps: false }
 )

@@ -1,27 +1,18 @@
+DROP database ASN;
 CREATE database ASN;
 USE ASN;
 
 INSERT INTO metodos (metodo, categoria_artistica) VALUES
 ('tradicional', 'ilustración'),
 ('tradicional', 'escultura'),
-('digital', 'ilustración'),
-('digital', 'diseño gráfico'),
-('digital', 'modelado 3D'),
-('digital', 'animación'),
-('digital', 'escultura'),
 ('tradicional', 'diseño gráfico'),
 ('tradicional', 'animación'),
-('digital', 'modelado 3D'),
+('tradicional', 'modelado 3D'),
 ('digital', 'ilustración'),
-('tradicional', 'escultura'),
+('digital', 'escultura'),
 ('digital', 'diseño gráfico'),
-('digital', 'modelado 3D'),
 ('digital', 'animación'),
-('digital', 'ilustración'),
-('tradicional', 'escultura'),
-('digital', 'diseño gráfico'),
-('digital', 'modelado 3D'),
-('digital', 'animación');
+('digital', 'modelado 3D');
 
 
 INSERT INTO materiales (nombre, descripcion, marca, imagen, tutorial, metodoId) VALUES
@@ -91,53 +82,143 @@ INSERT INTO herramientas (nombre, descripcion, marca) VALUES
 ('Logitech Pen', 'Lápiz óptico ergonómico.', 'Logitech'),
 ('Gaomon PD1560', 'Pantalla gráfica para diseño digital.', 'Gaomon');
 
-INSERT INTO privados (nombre, email, password, fecha_registro, role) VALUES
-('Claudia', 'Claudia@example.com', 'password123', '2024-01-01', 'admin');
 
-INSERT INTO usuarios (id, nombre, email, password, fecha_registro, role) VALUES
+INSERT INTO privados (id, nombre, email, password, fecha_registro, role) VALUES
 (1, 'Marta', 'marta@example.com', '$2b$10$HVIm3JRLYWlKY/R4RmkwMe8D6EM80kaBAwrFWX8t8ksD1oio8V9rq', '2024-11-19 14:07:19', 'usuario'),
 (2, 'Hector', 'hector@example.com', '$2b$10$u7cCa3hbX8JucO1LVGjL5.ECZ/INKqW.C1tHt9WaaBnudcr6NnoZ6', '2024-11-19 14:07:19', 'artista'),
 (3, 'Nuria', 'nuria@example.com', '$2b$10$UZnI7sGMcBS9lK0mvMU22ewQRv9rSeXvixlimsn4F7PJmX220gJ4y', '2024-11-19 14:07:19', 'usuario'),
 (4, 'Pablo', 'pablo@example.com', '$2b$10$31FM33b41bUyAu8UYNGzzuoTy8GxXq2qhHjnNKk7FK5o8BfiGCZ9y', '2024-11-19 14:07:19', 'usuario'),
 (5, 'Sara', 'sara@example.com', '$2b$10$MaXEgCOK6doaS8PPZZaL6epZhP4LnJDZaXoqwPCwoj7TmgTSqujWS', '2024-11-19 14:07:19', 'artista'),
-(6, 'Javier', 'javier@example.com', '$2b$10$7APX.UvF8c9ov1YPuk3qYueXeIaPx9yBBNq/FcVJgiEE.6Ht7QHRO', '2024-11-19 14:07:19', 'admin'),
+(6, 'Javier', 'javier@example.com', '$2b$10$7APX.UvF8c9ov1YPuk3qYueXeIaPx9yBBNq/FcVJgiEE.6Ht7QHRO', '2024-11-19 14:07:19', 'usuario'),
 (7, 'Paula', 'paula@example.com', '$2b$10$F4hUA0DFR65xe3vdG/4N0ugmPpUbXZOgp8QMDpMrZH8xEQJGr1Gfq', '2024-11-19 14:07:19', 'artista'),
 (8, 'Pedro', 'pedro@example.com', '$2b$10$1KDnKOuU6Tp6sX5ikv5LEuzIbgfJEynE1LzvMw4kJeniPdwPKSI7a', '2024-11-19 14:07:19', 'usuario'),
 (9, 'Laura', 'laura@example.com', '$2b$10$qsxRw/wFpCg03ksh9SzO0OR3hUqLp11dCiyT6ChxsNjNX28pSsf9W', '2024-11-19 14:07:19', 'usuario'),
 (10, 'Claudia', 'claudia@example.com', '$2b$10$X6M3K5NNdWY6/D2o7XSp0u2/7Tus8gPsNSI1GbzGty3Ur0MtQdg9e', '2024-11-19 14:07:19', 'artista'),
 (11, 'Pepe', 'pepe@example.com', '$2b$10$M67cM4YDJv6BsRDeJBGCvefwy1VafBMCD1DmI7Y//5YD6TGtjllTy', '2024-11-19 14:07:19', 'usuario'),
 (12, 'Maria', 'maria@example.com', '$2b$10$luKB35hN.N9diB/KTAfNJuu/e58iQFNCWF89sjDgTnSsGHW7ULtIC', '2024-11-19 14:07:19', 'usuario'),
-(13, 'Carlos', 'carlos@example.com', '$2b$10$J4/JDO6W.AYV5D2lD81wrOik5SfAU.IPD.A3cEZmC8rhW4RXgxxC6', '2024-11-19 14:07:19', 'admin'),
+(13, 'Carlos', 'carlos@example.com', '$2b$10$J4/JDO6W.AYV5D2lD81wrOik5SfAU.IPD.A3cEZmC8rhW4RXgxxC6', '2024-11-19 14:07:19', 'usuario'),
 (14, 'Ana', 'ana@example.com', '$2b$10$vsNNwJRUHOheR55VUiOwX..PIbgXi1NI1I/zm84IorUyqklJDtxbe', '2024-11-19 14:07:19', 'artista'),
 (15, 'Luis', 'luis@example.com', '$2b$10$md7scFhnPvxBU1F23mcsOeJRMDb7vw9EEM4vV4HrZWS1CurrDfzqS', '2024-11-19 14:07:19', 'usuario'),
 (16, 'Sofia', 'sofia@example.com', '$2b$10$x0z0FdkrOEklFwErT76qyesM8F8.4n7QI17GV5631jGTpzWq1u4R.', '2024-11-19 14:07:19', 'artista'),
 (17, 'Miguel', 'miguel@example.com', '$2b$10$Qujwq.6atMKNQiOMup9tQeckrjuCpU11oHkC7qvuLsZLWkGzAGEKi', '2024-11-19 14:07:19', 'usuario'),
 (18, 'Julia', 'julia@example.com', '$2b$10$ygBW.q511Ml0Fj5gDGTxz.NTlXLDHV6uVeXlBDiQ2aIaqWMdi0Way', '2024-11-19 14:07:19', 'artista'),
 (19, 'Raul', 'raul@example.com', '$2b$10$6vD0wrVa57H5eiaf.EuBK.mD3ywjfcoOnBrpMJRbKFfL16UCTh1U2', '2024-11-19 14:07:19', 'usuario'),
-(20, 'Daniel', 'daniel@example.com', '$2b$10$r27ZkX/T41pbzflzPMwiNuPdzCT5bSaGpZClUVStDaUDAHbeBQkzS', '2024-11-19 14:07:19', 'admin');
+(20, 'Daniel', 'daniel@example.com', '$2b$10$r27ZkX/T41pbzflzPMwiNuPdzCT5bSaGpZClUVStDaUDAHbeBQkzS', '2024-11-19 14:07:19', 'artista');
 
 
-INSERT INTO publicos (id, nombre_usuario, foto, descripcion, rol, privadoId) VALUES
-(1, 'MartaIdeas', 'marta.jpg', 'Fanática del diseño gráfico.', 'usuario', 1),
-(2, 'HectorDigital', 'hector.jpg', 'Artista digital emergente.', 'artista', 2),
-(3, 'NuriaSketcher', 'nuria.jpg', 'Aficionada al dibujo.', 'usuario', 3),
-(4, 'PabloArtFan', 'pablo.jpg', 'Fan del arte.', 'usuario', 4),
-(5, 'SaraIllustrator', 'sara.jpg', 'Ilustradora profesional.', 'artista', 5),
-(6, 'JavierAdmin', 'javier.jpg', 'Administrador y soporte.', 'admin', 6),
-(7, 'Paula3D', 'paula.jpg', 'Experta en modelado 3D.', 'artista', 7),
-(8, 'PedroDraw', 'pedro.jpg', 'Dibujante de cómics.', 'usuario', 8),
-(9, 'LauraSketch', 'laura.jpg', 'Amante de los bocetos rápidos.', 'usuario', 9),
-(10, 'Claudia_Artista', 'Claudia.jpg', 'Artista de ilustración digital y tradicional.', 'artista', 10),
-(11, 'Pepe_U', 'pepe.jpg', 'Explorador de ideas creativas.', 'usuario', 11),
-(12, 'MariaDesign', 'maria.jpg', 'Amante del diseño gráfico.', 'usuario', 12),
-(13, 'CarlosAdmin', 'carlos.jpg', 'Administrador de la red.', 'admin', 13),
-(14, 'AnaArt', 'ana.jpg', 'Escultora apasionada.', 'artista', 14),
-(15, 'LuisUser', 'luis.jpg', 'Principiante en arte digital.', 'usuario', 15),
-(16, 'SofiaPainter', 'sofia.jpg', 'Pintora profesional.', 'artista', 16),
-(17, 'MiguelIdeas', 'miguel.jpg', 'Entusiasta de la creatividad.', 'usuario', 17),
-(18, 'JuliaSculpt', 'julia.jpg', 'Escultora tradicional.', 'artista', 18),
-(19, 'RaulDigital', 'raul.jpg', 'Curioso del modelado 3D.', 'usuario', 19),
-(20, 'DanielAdmin', 'daniel.jpg', 'Admin de la red social.', 'admin', 20);
+/* publicos (nombre_usuario = , foto = , descripcion = , rol = ) VALUES
+('MartaIdeas', 'marta.jpg', 'Fanática del diseño gráfico.', 'usuario'),
+('HectorDigital', 'hector.jpg', 'Artista digital emergente.', 'artista'),
+('NuriaSketcher', 'nuria.jpg', 'Aficionada al dibujo.', 'usuario'),
+('PabloArtFan', 'pablo.jpg', 'Fan del arte.', 'usuario'),
+('SaraIllustrator', 'sara.jpg', 'Ilustradora profesional.', 'artista'),
+('JavierFan', 'javier.jpg', 'Administrador y soporte.', 'usuario'),
+('Paula3D', 'paula.jpg', 'Experta en modelado 3D.', 'artista'),
+('PedroDraw', 'pedro.jpg', 'Dibujante de cómics.', 'usuario'),
+('LauraSketch', 'laura.jpg', 'Amante de los bocetos rápidos.', 'usuario'),
+('Claudia_Artista', 'Claudia.jpg', 'Artista de ilustración digital y tradicional.', 'artista'),
+('Pepe_U', 'pepe.jpg', 'Explorador de ideas creativas.', 'usuario'),
+('MariaDesign', 'maria.jpg', 'Amante del diseño gráfico.', 'usuario'),
+('CarlosUser', 'carlos.jpg', 'Administrador de la red.', 'usuario'),
+('AnaArt', 'ana.jpg', 'Escultora apasionada.', 'artista'),
+('LuisUser', 'luis.jpg', 'Principiante en arte digital.', 'usuario'),
+('SofiaPainter', 'sofia.jpg', 'Pintora profesional.', 'artista'),
+('MiguelIdeas', 'miguel.jpg', 'Entusiasta de la creatividad.', 'usuario'),
+('JuliaSculpt', 'julia.jpg', 'Escultora tradicional.', 'artista'),
+('RaulDigital', 'raul.jpg', 'Curioso del modelado 3D.', 'usuario'),
+('DanielArtist', 'daniel.jpg', 'Admin de la red social.', 'artista'); */
+
+UPDATE publicos 
+SET nombre_usuario = 'MartaIdeas', foto = 'marta.jpg', descripcion = 'Fanática del diseño gráfico.', rol = 'usuario'
+WHERE id = 1;
+
+UPDATE publicos 
+SET nombre_usuario = 'HectorDigital', foto = 'hector.jpg', descripcion = 'Artista digital emergente.', rol = 'artista'
+WHERE id = 2;
+
+UPDATE publicos 
+SET nombre_usuario = 'NuriaSketcher', foto = 'nuria.jpg', descripcion = 'Aficionada al dibujo.', rol = 'usuario'
+WHERE id = 3;
+
+UPDATE publicos 
+SET nombre_usuario = 'PabloArtFan', foto = 'pablo.jpg', descripcion = 'Fan del arte.', rol = 'usuario'
+WHERE id = 4;
+
+UPDATE publicos 
+SET nombre_usuario = 'SaraIllustrator', foto = 'sara.jpg', descripcion = 'Ilustradora profesional.', rol = 'artista'
+WHERE id = 5;
+
+UPDATE publicos 
+SET nombre_usuario = 'JavierFan', foto = 'javier.jpg', descripcion = 'Administrador y soporte.', rol = 'usuario'
+WHERE id = 6;
+
+UPDATE publicos 
+SET nombre_usuario = 'Paula3D', foto = 'paula.jpg', descripcion = 'Experta en modelado 3D.', rol = 'artista'
+WHERE id = 7;
+
+UPDATE publicos 
+SET nombre_usuario = 'PedroDraw', foto = 'pedro.jpg', descripcion = 'Dibujante de cómics.', rol = 'usuario'
+WHERE id = 8;
+
+UPDATE publicos 
+SET nombre_usuario = 'LauraSketch', foto = 'laura.jpg', descripcion = 'Amante de los bocetos rápidos.', rol = 'usuario'
+WHERE id = 9;
+
+UPDATE publicos 
+SET nombre_usuario = 'Claudia_Artista', foto = 'Claudia.jpg', descripcion = 'Artista de ilustración digital y tradicional.', rol = 'artista'
+WHERE id = 10;
+
+UPDATE publicos 
+SET nombre_usuario = 'Pepe_U', foto = 'pepe.jpg', descripcion = 'Explorador de ideas creativas.', rol = 'usuario'
+WHERE id = 11;
+
+UPDATE publicos 
+SET nombre_usuario = 'MariaDesign', foto = 'maria.jpg', descripcion = 'Amante del diseño gráfico.', rol = 'usuario'
+WHERE id = 12;
+
+UPDATE publicos 
+SET nombre_usuario = 'CarlosUser', foto = 'carlos.jpg', descripcion = 'Administrador de la red.', rol = 'usuario'
+WHERE id = 13;
+
+UPDATE publicos 
+SET nombre_usuario = 'AnaArt', foto = 'ana.jpg', descripcion = 'Escultora apasionada.', rol = 'artista'
+WHERE id = 14;
+
+UPDATE publicos 
+SET nombre_usuario = 'LuisUser', foto = 'luis.jpg', descripcion = 'Principiante en arte digital.', rol = 'usuario'
+WHERE id = 15;
+
+UPDATE publicos 
+SET nombre_usuario = 'SofiaPainter', foto = 'sofia.jpg', descripcion = 'Pintora profesional.', rol = 'artista'
+WHERE id = 16;
+
+UPDATE publicos 
+SET nombre_usuario = 'MiguelIdeas', foto = 'miguel.jpg', descripcion = 'Entusiasta de la creatividad.', rol = 'usuario'
+WHERE id = 17;
+
+UPDATE publicos 
+SET nombre_usuario = 'JuliaSculpt', foto = 'julia.jpg', descripcion = 'Escultora tradicional.', rol = 'artista'
+WHERE id = 18;
+
+UPDATE publicos 
+SET nombre_usuario = 'RaulDigital', foto = 'raul.jpg', descripcion = 'Curioso del modelado 3D.', rol = 'usuario'
+WHERE id = 19;
+
+UPDATE publicos 
+SET nombre_usuario = 'DanielArtist', foto = 'daniel.jpg', descripcion = 'Admin de la red social.', rol = 'artista'
+WHERE id = 20;
+
+UPDATE publicos 
+SET nombre_usuario = 'CelinaAdmin', foto = 'celina.jpg', descripcion = 'Admin de la red social.', rol = 'admin y artista de la ilustración'
+WHERE id = 21;
+
+UPDATE publicos 
+SET nombre_usuario = 'OliviaAdmin', foto = 'olivia.jpg', descripcion = 'Admin de la red social.', rol = 'admin y artista del diseño'
+WHERE id = 22;
+
+UPDATE publicos 
+SET nombre_usuario = 'JohanaAdmin', foto = 'johana.jpg', descripcion = 'Admin de la red social.', rol = 'admin y artista de la escultura'
+WHERE id = 23;
 
 
 

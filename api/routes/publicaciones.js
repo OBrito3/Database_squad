@@ -12,9 +12,9 @@ router.put('/:id', checkAuth, checkAdmin, updatePublicacion)
 router.delete('/:id', checkAuth, checkAdmin, deletePublicacion)  
 
 
-// USARIOS Y ARTISTAS
+// USUARIOS Y ARTISTAS
 
-router.post('/privados/:id', checkAuth, createUserPublicacion)
+router.post('/publicos/:publicoId', checkAuth, createUserPublicacion)
 router.put('/privados/:id', checkAuth, updateUserPublicacion)
 router.delete('/privados/:id', checkAuth, deleteUserPublicacion)
 
