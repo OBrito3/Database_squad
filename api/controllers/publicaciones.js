@@ -1,6 +1,4 @@
 const Publicacion = require('../models/publicaciones')
-//create, updte and delete solo los administradores
-
 
 //ADMINS
 async function getAllPublicaciones(req, res) {
@@ -73,7 +71,7 @@ async function deletePublicacion(req, res) {
     }
 }
 
-//USERS
+// USUARIOS Y ARTISTAS
 async function createUserPublicacion(req, res) {
     try {
         const publicacion = await Publicacion.create(req.body, {

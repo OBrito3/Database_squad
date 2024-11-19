@@ -1,0 +1,182 @@
+INSERT INTO metodos (metodo, categoria_artistica) VALUES
+('tradicional', 'ilustración'),
+('tradicional', 'escultura'),
+('digital', 'ilustración'),
+('digital', 'diseño gráfico'),
+('digital', 'modelado 3D'),
+('digital', 'animación'),
+('digital', 'escultura'),
+('tradicional', 'diseño gráfico'),
+('tradicional', 'animación'),
+('digital', 'modelado 3D'),
+('digital', 'ilustración'),
+('tradicional', 'escultura'),
+('digital', 'diseño gráfico'),
+('digital', 'modelado 3D'),
+('digital', 'animación'),
+('digital', 'ilustración'),
+('tradicional', 'escultura'),
+('digital', 'diseño gráfico'),
+('digital', 'modelado 3D'),
+('digital', 'animación');
+
+
+INSERT INTO materiales (nombre, descripcion, marca, imagen, tutorial, metodoId) VALUES
+('Lápices de Grafito', 'Lápices de diferentes grados para dibujo técnico.', 'Staedtler', 'lapices.jpg', 'https://tutorial.com/lapices', 1),
+('Acuarelas', 'Pinturas en base de agua para trabajos artísticos.', 'Winsor & Newton', 'acuarelas.jpg', 'https://tutorial.com/acuarelas', 2),
+('Lienzos', 'Lienzos de algodón para pintura al óleo o acrílico.', 'Arteza', 'lienzos.jpg', 'https://tutorial.com/lienzos', 2),
+('Carboncillo', 'Material para bocetos rápidos y sombras.', 'General\'s', 'carboncillo.jpg', 'https://tutorial.com/carboncillo', 2),
+('Óleos', 'Pinturas al óleo de alta calidad.', 'Van Gogh', 'oleos.jpg', 'https://tutorial.com/oleos', 1),
+('Rotuladores', 'Rotuladores de tinta para ilustración.', 'Copic', 'rotuladores.jpg', 'https://tutorial.com/rotuladores', 3),
+('Acrílicos', 'Pinturas acrílicas para arte moderno.', 'Liquitex', 'acrilicos.jpg', 'https://tutorial.com/acrilicos', 1),
+('Pasteles', 'Colores en barra para efectos suaves.', 'Rembrandt', 'pasteles.jpg', 'https://tutorial.com/pasteles', 8),
+('Bloc de Dibujo', 'Bloc de papel para técnicas mixtas.', 'Strathmore', 'bloc.jpg', 'https://tutorial.com/bloc', 9),
+('Pinceles', 'Pinceles para óleo y acrílico.', 'Da Vinci', 'pinceles.jpg', 'https://tutorial.com/pinceles', 1),
+('Témperas', 'Pinturas a base de agua para principiantes.', 'Pelikan', 'temperas.jpg', 'https://tutorial.com/temperas', 2),
+('Espátulas', 'Herramientas para mezcla y texturas.', 'RGM', 'espatulas.jpg', 'https://tutorial.com/espatulas', 8),
+('Papeles de Acuarela', 'Papel texturizado para acuarelas.', 'Fabriano', 'papel-acuarela.jpg', 'https://tutorial.com/papel-acuarela', 8),
+('Plumillas', 'Plumillas para caligrafía artística.', 'Brause', 'plumillas.jpg', 'https://tutorial.com/plumillas', 1),
+('Tinta China', 'Tinta para ilustración y caligrafía.', 'Higgins', 'tinta.jpg', 'https://tutorial.com/tinta', 9),
+('Lápices de Colores', 'Lápices pigmentados para arte.', 'Prismacolor', 'lapices-colores.jpg', 'https://tutorial.com/lapices-colores',9),
+('Esmaltes', 'Colores cerámicos para trabajos en vidrio.', 'Amaco', 'esmaltes.jpg', 'https://tutorial.com/esmaltes', 8),
+('Ceras', 'Pasteles cerosos para ilustraciones brillantes.', 'Crayola', 'ceras.jpg', 'https://tutorial.com/ceras', 1),
+('Goma de Borrar', 'Goma especial para detalles en dibujos.', 'Faber-Castell', 'goma.jpg', 'https://tutorial.com/goma',1),
+('Tableros de Dibujo', 'Tableros para dibujo técnico.', 'Rotring', 'tablero.jpg', 'https://tutorial.com/tableros', 2);
+
+
+INSERT INTO programas (nombre, descripcion, marca, tutorial) VALUES
+('Adobe Photoshop', 'Software líder en edición y diseño gráfico.', 'Adobe', 'https://tutorial.com/photoshop'),
+('Adobe Illustrator', 'Herramienta vectorial para diseño gráfico.', 'Adobe', 'https://tutorial.com/illustrator'),
+('CorelDRAW', 'Software de diseño gráfico y edición vectorial.', 'Corel', 'https://tutorial.com/coreldraw'),
+('Affinity Designer', 'Herramienta alternativa para diseño gráfico.', 'Serif', 'https://tutorial.com/affinity'),
+('Canva', 'Plataforma de diseño gráfico online.', 'Canva', 'https://tutorial.com/canva'),
+('Inkscape', 'Editor vectorial gratuito y de código abierto.', 'Inkscape', 'https://tutorial.com/inkscape'),
+('Procreate', 'Aplicación de ilustración para iPad.', 'Savage', 'https://tutorial.com/procreate'),
+('Krita', 'Software gratuito de ilustración digital.', 'Krita Foundation', 'https://tutorial.com/krita'),
+('Blender', 'Software gratuito para modelado 3D y animación.', 'Blender Foundation', 'https://tutorial.com/blender'),
+('ZBrush', 'Software especializado en modelado 3D y esculpido.', 'Pixologic', 'https://tutorial.com/zbrush'),
+('Autodesk Maya', 'Herramienta profesional de modelado y animación 3D.', 'Autodesk', 'https://tutorial.com/maya'),
+('Cinema 4D', 'Software avanzado para modelado y animación 3D.', 'Maxon', 'https://tutorial.com/cinema4d'),
+('3ds Max', 'Software profesional para modelado y renderizado 3D.', 'Autodesk', 'https://tutorial.com/3dsmax'),
+('After Effects', 'Herramienta para efectos visuales y animación.', 'Adobe', 'https://tutorial.com/aftereffects'),
+('Toon Boom Harmony', 'Software profesional para animación 2D.', 'Toon Boom', 'https://tutorial.com/toonboom'),
+('OpenToonz', 'Software gratuito para animación 2D.', 'OpenToonz', 'https://tutorial.com/opentoonz'),
+('Clip Studio Paint', 'Software para ilustración y cómics.', 'CELSYS', 'https://tutorial.com/clipstudio'),
+('SketchUp', 'Herramienta para modelado arquitectónico y 3D.', 'Trimble', 'https://tutorial.com/sketchup'),
+('Figma', 'Plataforma colaborativa para diseño UI/UX.', 'Figma', 'https://tutorial.com/figma'),
+('Adobe XD', 'Herramienta para diseño de interfaces y prototipos.', 'Adobe', 'https://tutorial.com/adobexd');
+
+INSERT INTO herramientas (nombre, descripcion, marca) VALUES
+('Wacom Tablet', 'Tableta gráfica ideal para diseño digital.', 'Wacom'),
+('Huion Kamvas', 'Pantalla gráfica para ilustración profesional.', 'Huion'),
+('XP-Pen Deco', 'Tableta compacta para principiantes.', 'XP-Pen'),
+('iPad Pro', 'Dispositivo portátil para ilustración digital.', 'Apple'),
+('Samsung Galaxy Tab', 'Tableta con compatibilidad para diseño gráfico.', 'Samsung'),
+('Lenovo ThinkPad', 'Portátil de alto rendimiento para diseño.', 'Lenovo'),
+('Surface Pro', 'Tableta portátil para diseño y dibujo.', 'Microsoft'),
+('Cintiq 16', 'Pantalla gráfica avanzada para profesionales.', 'Wacom'),
+('Bamboo Pen', 'Lápiz óptico básico para diseño gráfico.', 'Wacom'),
+('Huion H640P', 'Tableta gráfica pequeña pero potente.', 'Huion'),
+('Cintiq Pro', 'Pantalla gráfica para artistas avanzados.', 'Wacom'),
+('Dell XPS 15', 'Portátil con gráficos de alto rendimiento.', 'Dell'),
+('Asus ZenBook', 'Laptop para diseño gráfico y modelado.', 'Asus'),
+('MacBook Pro', 'Laptop potente para proyectos creativos.', 'Apple'),
+('iMac', 'Computadora de escritorio ideal para artistas.', 'Apple'),
+('Canon Scanner', 'Escáner profesional para digitalización.', 'Canon'),
+('Epson Perfection', 'Escáner para alta resolución.', 'Epson'),
+('Brother Laser Printer', 'Impresora láser de alta calidad.', 'Brother'),
+('Logitech Pen', 'Lápiz óptico ergonómico.', 'Logitech'),
+('Gaomon PD1560', 'Pantalla gráfica para diseño digital.', 'Gaomon');
+
+
+
+INSERT INTO privados (nombre, email, password, fecha_registro, role) VALUES
+('Claudia', 'Claudia@example.com', 'password123', '2024-01-01', 'artista'),
+('Pepe', 'pepe@example.com', 'password123', '2024-01-02', 'usuario'),
+('Maria', 'maria@example.com', 'password123', '2024-01-03', 'usuario'),
+('Carlos', 'carlos@example.com', 'password123', '2024-01-04', 'admin'),
+('Ana', 'ana@example.com', 'password123', '2024-01-05', 'artista'),
+('Luis', 'luis@example.com', 'password123', '2024-01-06', 'usuario'),
+('Sofia', 'sofia@example.com', 'password123', '2024-01-07', 'artista'),
+('Miguel', 'miguel@example.com', 'password123', '2024-01-08', 'usuario'),
+('Julia', 'julia@example.com', 'password123', '2024-01-09', 'artista'),
+('Raul', 'raul@example.com', 'password123', '2024-01-10', 'usuario'),
+('Laura', 'laura@example.com', 'password123', '2024-01-11', 'usuario'),
+('Pedro', 'pedro@example.com', 'password123', '2024-01-12', 'usuario'),
+('Paula', 'paula@example.com', 'password123', '2024-01-13', 'artista'),
+('Javier', 'javier@example.com', 'password123', '2024-01-14', 'admin'),
+('Sara', 'sara@example.com', 'password123', '2024-01-15', 'artista'),
+('Pablo', 'pablo@example.com', 'password123', '2024-01-16', 'usuario'),
+('Nuria', 'nuria@example.com', 'password123', '2024-01-17', 'usuario'),
+('Hector', 'hector@example.com', 'password123', '2024-01-18', 'artista'),
+('Marta', 'marta@example.com', 'password123', '2024-01-19', 'usuario'),
+('Daniel', 'daniel@example.com', 'password123', '2024-01-20', 'admin');
+
+INSERT INTO publicos (id, nombre_usuario, foto, descripcion, rol, privadoId) VALUES
+(1, 'Claudia_Artista', 'Claudia.jpg', 'Artista de ilustración digital y tradicional.', 'artista', 1),
+(2, 'Pepe_U', 'pepe.jpg', 'Explorador de ideas creativas.', 'usuario', 2),
+(3, 'MariaDesign', 'maria.jpg', 'Amante del diseño gráfico.', 'usuario', 3),
+(4, 'CarlosAdmin', 'carlos.jpg', 'Administrador de la red.', 'admin', 4),
+(5, 'AnaArt', 'ana.jpg', 'Escultora apasionada.', 'artista', 5),
+(6, 'LuisUser', 'luis.jpg', 'Principiante en arte digital.', 'usuario', 6),
+(7, 'SofiaPainter', 'sofia.jpg', 'Pintora profesional.', 'artista', 7),
+(8, 'MiguelIdeas', 'miguel.jpg', 'Entusiasta de la creatividad.', 'usuario', 8),
+(9, 'JuliaSculpt', 'julia.jpg', 'Escultora tradicional.', 'artista', 9),
+(10, 'RaulDigital', 'raul.jpg', 'Curioso del modelado 3D.', 'usuario', 10),
+(11, 'LauraSketch', 'laura.jpg', 'Amante de los bocetos rápidos.', 'usuario', 11),
+(12, 'PedroDraw', 'pedro.jpg', 'Dibujante de cómics.', 'usuario', 12),
+(13, 'Paula3D', 'paula.jpg', 'Experta en modelado 3D.', 'artista', 13),
+(14, 'JavierAdmin', 'javier.jpg', 'Administrador y soporte.', 'admin', 14),
+(15, 'SaraIllustrator', 'sara.jpg', 'Ilustradora profesional.', 'artista', 15),
+(16, 'PabloArtFan', 'pablo.jpg', 'Fan del arte.', 'usuario', 16),
+(17, 'NuriaSketcher', 'nuria.jpg', 'Aficionada al dibujo.', 'usuario', 17),
+(18, 'HectorDigital', 'hector.jpg', 'Artista digital emergente.', 'artista', 18),
+(19, 'MartaIdeas', 'marta.jpg', 'Fanática del diseño gráfico.', 'usuario', 19),
+(20, 'DanielAdmin', 'daniel.jpg', 'Admin de la red social.', 'admin', 20);
+
+
+
+INSERT INTO publicaciones (contenido, fecha_publicacion, categoria, link, metodoId, publicoId) VALUES
+('Exploración de texturas en escultura.', '2024-01-06', 'tutorial', 'https://tutorial.com/texturas', 2, 6),
+('Mis diseños gráficos favoritos.', '2024-01-07', 'portfolio', 'https://portfolio.com/disenos', 3, 7),
+('Proyecto personal de modelado 3D.', '2024-01-08', 'portfolio', 'https://portfolio.com/modelado', 4, 8),
+('Animación básica para principiantes.', '2024-01-09', 'tutorial', 'https://tutorial.com/animacion', 5, 9),
+('Ilustraciones digitales y tradicionales.', '2024-01-10', 'portfolio', 'https://portfolio.com/ilustracion', 1, 10),
+('Cómo trabajar con óleo en diseño conceptual.', '2024-01-11', 'tutorial', 'https://tutorial.com/oleo', 2, 11),
+('Grabados para artistas avanzados.', '2024-01-12', 'portfolio', 'https://portfolio.com/grabados', 3, 12),
+('Edición de video en programas digitales.', '2024-01-13', 'tutorial', 'https://tutorial.com/edicion', 4, 13),
+('Arte conceptual paso a paso.', '2024-01-14', 'portfolio', 'https://portfolio.com/conceptual', 5, 14),
+('Caligrafía artística en papel.', '2024-01-15', 'tutorial', 'https://tutorial.com/caligrafia', 1, 15),
+('Mis proyectos de arte abstracto.', '2024-01-16', 'portfolio', 'https://portfolio.com/abstracto', 2, 16),
+('Cómo crear bocetos rápidos.', '2024-01-17', 'tutorial', 'https://tutorial.com/bocetos', 3, 17),
+('Dibujo técnico en tableta digital.', '2024-01-18', 'tutorial', 'https://tutorial.com/digital', 4, 18),
+('Galería de arte digital.', '2024-01-19', 'portfolio', 'https://portfolio.com/galeria', 5, 19),
+('Tutorial de escultura para principiantes.', '2024-01-20', 'tutorial', 'https://tutorial.com/escultura', 2, 20);
+
+
+
+INSERT INTO programa_herramientas (programas_id, herramientas_id) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10),
+(1, 11),
+(2, 12),
+(3, 13),
+(4, 14),
+(5, 15),
+(6, 16),
+(7, 17),
+(8, 18),
+(9, 19),
+(10, 20);
+
+
+
+

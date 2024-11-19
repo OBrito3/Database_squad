@@ -1,5 +1,7 @@
 const Publico = require('../models/perfil_publico')
-//create, updte and delete solo los administradores
+//create, update and delete solo los administradores
+
+// ADMINS
 
 async function getAllPerfilesPublicos(req, res) {
     try {
@@ -72,7 +74,7 @@ async function deletePerfilPublico(req, res) {
 }
 
 
-//USERS
+// USUARIOS Y ARTISTAS
 
 async function updateUserPerfilPublico(req, res) {
     try {

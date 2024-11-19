@@ -4,7 +4,7 @@ const Privado = require("../models/perfil_privado.js");
 
 const signup = async (req, res) => {
     try {
-        const saltRounds = bcrypt.genSaltSync(process.env.VUELTAS); //esto en .env
+        const saltRounds = bcrypt.genSaltSync(parseInt(process.env.VUELTAS)); //esto en .env
         const hasedPassword = bcrypt.hashSync(req.body.password, saltRounds);
         req.body.password = hasedPassword;
 
@@ -13,7 +13,7 @@ const signup = async (req, res) => {
         const token = jwt.sign(payload, process.env.TOKEN_WORD, { expiresIn: process.env.EXPIRES });
         res.status(200).json({ token, role: privado.role, usuario: privado.email });
     } catch (error) {
-        return res.status(500).send(error);
+        return res.status(500).send(error.message);
     }
 };
 

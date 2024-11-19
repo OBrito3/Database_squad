@@ -1,5 +1,7 @@
 const Programa = require('../models/programas')
-//create, updte and delete solo los administradores
+//create, update and delete solo los administradores
+
+// ADMINS
 
 async function getAllProgramas(req, res) {
     try {
@@ -71,11 +73,51 @@ async function deletePrograma(req, res) {
     }
 }
 
+// ARTISTAS
+
+async function updateUserPrograma(req, res) {
+    try {
+        const [programaExist, programa] = await Programa.update(req.body, {
+            returning: true,
+            where: {
+                id: res.locals.privado.id,
+            },
+        })
+        if (programaExist !== 0) {
+            return res.status(200).json({ message: 'Programa actualizado', programa: programa })
+        } else {
+            return res.status(404).send('Programa no encontrado')
+        }
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
+
+async function deleteUserPrograma(req, res) {
+    try {
+        const programa = await programa.destroy({
+            where: {
+                id: res.locals.privado.id,
+            },
+        })
+        if (programa) {
+            return res.status(200).json('Programa borrado')
+        } else {
+            return res.status(404).send('Programa no encontrado')
+        }
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
+
+
 module.exports = {
     getAllProgramas,
     getOnePrograma,
     createPrograma,
     updatePrograma,
-    deletePrograma
+    deletePrograma,
+    updateUserPrograma,
+    deleteUserPrograma
 }
    

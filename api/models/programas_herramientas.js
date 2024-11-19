@@ -1,4 +1,4 @@
-/*
+
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
@@ -18,7 +18,7 @@ const Pro_Herr = sequelize.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'herramientas_digitales',
+                model: 'herramientas',
                 key: 'id'   
             }
         },
@@ -35,4 +35,3 @@ const Pro_Herr = sequelize.define(
 )
 
 module.exports = Pro_Herr
-*/

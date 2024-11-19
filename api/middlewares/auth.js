@@ -7,7 +7,7 @@ const checkAuth = async (req, res, next) => {
             return res.status(404).send("Token no encontrado");
         }
 
-        jwt.verify(req.headers.authorization, TOKEN_WORD, async (err, result) => {
+        jwt.verify(req.headers.authorization, process.env.TOKEN_WORD, async (err, result) => {
             if (err) return res.status(401).send("Token no válido");
             const privado = await Privado.findOne({
                 where: { email: result.email },
@@ -17,25 +17,25 @@ const checkAuth = async (req, res, next) => {
             next();
         });
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send(error.message);
     }
 };
 
 const checkAdmin = async (req, res, next) => {
     try {
-        if (res.locals.privado.role !== "Admin") {
+        if (res.locals.privado.role !== "admin") {
             return res.status(401).send("No eres administrador");
         } else {
             next();
         }
     } catch (error) {
-        res.status(404).send(error);
+        res.status(404).send(error.message);
     }
 };
 
 const checkArtista = async (req, res, next) => {
     try {
-        if (res.locals.privado.role !== "Artista") {
+        if (res.locals.privado.role !== "artista" && res.locals.privado.role !== "admin") {
             return res.status(401).send("No estás autorizado");
         } else {
             next();

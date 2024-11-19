@@ -75,7 +75,7 @@ async function deletePerfilPrivado(req, res) {
 }
 
 
-// USERS
+// USUARIOS Y ARTISTAS
 
 async function updateUserPerfilPrivado(req, res) {
     try {
