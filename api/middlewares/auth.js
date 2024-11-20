@@ -33,7 +33,7 @@ const checkAdmin = async (req, res, next) => {
     }
 };
 
-const checkArtista = async (req, res, next) => {
+/* const checkArtista = async (req, res, next) => {
     try {
         if (res.locals.privado.role !== "artista" && res.locals.privado.role !== "admin") {
             return res.status(401).send("No estás autorizado");
@@ -42,6 +42,27 @@ const checkArtista = async (req, res, next) => {
         }
     } catch (error) {
         res.status(404).send(error);
+    }
+}; */
+
+const checkArtista = async (req, res, next) => {
+    try {
+        // Validar que res.locals.privado esté definido
+        if (!res.locals.privado) {
+            return res.status(401).send("Usuario no autenticado");
+        }
+
+        // Verificar rol
+        if (
+            res.locals.privado.role !== "artista" &&
+            res.locals.privado.role !== "admin"
+        ) {
+            return res.status(401).send("No estás autorizado");
+        }
+
+        next();
+    } catch (error) {
+        res.status(500).send(error.message);
     }
 };
 

@@ -89,7 +89,12 @@ async function createUserPublicacion(req, res) {
         if (!metodo) {
             return res.status(400).json({ message: 'Método no encontrado' });
         } */
+        // Verifica si el método existe usando el 'metodoId' del cuerpo de la solicitud
+        const metodo = await Metodo.findOne({where: {metodo:req.body.metodo, categoria_artistica:req.body.categoria_artistica}});
 
+        if (!metodo) {
+            return res.status(404).json({ message: 'Método no encontrado' });
+        }
         // Crear la publicación con el publicoId y metodoId
         const publicacion = await Publicacion.create({
             ...req.body, // Incluye el resto de los datos de la publicación
@@ -97,8 +102,8 @@ async function createUserPublicacion(req, res) {
             metodoId: metodo.id // Asignamos el 'metodoId' encontrado
         });
 
-        console.log(publicacion);
-        console.log(req.params.publicoId);
+        /* console.log(publicacion);
+        console.log(req.params.publicoId); */
 
         return res.status(200).json({ message: 'Publicación creada', publicacion: publicacion });
     } catch (error) {
@@ -108,7 +113,7 @@ async function createUserPublicacion(req, res) {
 }
 
 
-async function updateUserPublicacion(req, res) {
+/* async function updateUserPublicacion(req, res) {
     try {
         const [publicacionExist, publicacion] = await Publicacion.update(req.body, {
             returning: true,
@@ -125,8 +130,40 @@ async function updateUserPublicacion(req, res) {
         return res.status(500).send(error.message)
     }
 }
+ */
+async function updateUserPublicacion(req, res) {
+    try {
+        if (!res.locals.privado) {
+            return res.status(401).send("Usuario no autenticado");
+        }
 
-async function deleteUserPublicacion(req, res) {
+        console.log('ID recibido:', req.params.id);
+        console.log('publicoId recibido:', res.locals.privado.id);
+
+        const publicacion = await Publicacion.findOne({
+            where: {
+                id: req.params.id,
+                publicoId: res.locals.privado.id,
+            },
+        });
+
+        if (!publicacion) {
+            return res.status(404).send("Publicación no encontrada o no autorizada");
+        }
+
+        await publicacion.update(req.body);
+
+        return res.status(200).json({ message: "Publicación actualizada" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send(error.message);
+    }
+}
+
+
+
+
+/* async function deleteUserPublicacion(req, res) {
     try {
         const publicacion = await Publicacion.destroy({
             where: {
@@ -141,7 +178,36 @@ async function deleteUserPublicacion(req, res) {
     } catch (error) {
         return res.status(500).send(error.message)
     }
-}
+} */
+
+
+async function deleteUserPublicacion(req, res) {
+    try {
+        if (!res.locals.privado) {
+            return res.status(401).send("Usuario no autenticado");
+        }
+
+        console.log('ID recibido:', req.params.id);
+        console.log('publicoId recibido:', res.locals.privado.id);
+
+        const publicacion = await Publicacion.destroy({
+            where: {
+                id: req.params.id,
+                publicoId: res.locals.privado.id,
+            },
+        });
+
+        if (!publicacion) {
+            return res.status(404).send("Publicación no encontrada o no autorizada");
+        } else {
+            return res.status(200).json({ message: "Publicación borrada" });
+        }
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send(error.message);
+    }
+};
 
 module.exports = {
     getAllPublicaciones,

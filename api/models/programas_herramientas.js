@@ -5,7 +5,7 @@ const { sequelize } = require('../../database')
 const Pro_Herr = sequelize.define(
     'pro_herr',
     {
-        programa_id: {
+        /* programa_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -21,7 +21,7 @@ const Pro_Herr = sequelize.define(
                 model: 'herramientas',
                 key: 'id'   
             }
-        }/* ,
+        },
         metodo_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

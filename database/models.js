@@ -25,8 +25,8 @@ function addRelationsToModels() {
         Metodo.hasMany(Pro_Herr)
 
         // Many to many
-        Programa.belongsToMany(Herramienta, { through: 'programas_herramientas', timestamps: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-        Herramienta.belongsToMany(Programa, { through: 'programas_herramientas', timestamps: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+        Programa.belongsToMany(Herramienta, { through: Pro_Herr, timestamps: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+        Herramienta.belongsToMany(Programa, { through: Pro_Herr, timestamps: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
 
        
        
