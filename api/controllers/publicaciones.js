@@ -1,6 +1,10 @@
 const Publicacion = require('../models/publicaciones')
 const Publico = require('../models/perfil_publico')
 const Metodo = require('../models/metodos')
+const Material = require('../models/materiales_tradicionales')
+const Herramienta = require('../models/herramientas_digitales')
+const Programa = require('../models/programas')
+const Pro_Herr = require('../models/programas_herramientas')
 
 //ADMINS
 async function getAllPublicaciones(req, res) {
@@ -89,7 +93,8 @@ async function createUserPublicacion(req, res) {
         if (!metodo) {
             return res.status(400).json({ message: 'Método no encontrado' });
         } */
-        // Verifica si el método existe usando el 'metodoId' del cuerpo de la solicitud
+        const { metodoId, materiales, herramientas, programas, ...publicacionData } = req.body;
+        // Verifica si el método existe mediante el 'metodo' y 'categoria_artistica' proporcionados en el cuerpo de la solicitud
         const metodo = await Metodo.findOne({where: {metodo:req.body.metodo, categoria_artistica:req.body.categoria_artistica}});
 
         if (!metodo) {
@@ -97,10 +102,74 @@ async function createUserPublicacion(req, res) {
         }
         // Crear la publicación con el publicoId y metodoId
         const publicacion = await Publicacion.create({
-            ...req.body, // Incluye el resto de los datos de la publicación
+            ...publicacionData, // Incluye el resto de los datos de la publicación
             publicoId: req.params.publicoId, // 'publicoId' lo tomamos de los parámetros de la URL
             metodoId: metodo.id // Asignamos el 'metodoId' encontrado
         });
+
+        // RESTRICCIÓN POR RANGO DE metodoId
+
+        // Si metodo es tradicional, solo se permiten materiales
+        if (req.body.metodo === 'tradicional' /* && (metodoId >= 1 && metodoId <= 5) */) {
+            if (!materiales || materiales.length === 0) {
+                return res.status(400).json({ message: "Debes proporcionar materiales para este método" });
+            }
+
+            // Manejar materiales
+            for (const material of materiales) {
+                const [mat] = await Material.findOrCreate({
+                    where: { nombre: material.nombre },
+                    defaults: { ...material, metodoId },
+                });
+
+                if (mat.metodoId !== metodoId) {
+                    await mat.update({ metodoId });
+                }
+            }
+        }
+        // Si metodo es digital, solo se permiten herramientas y programas
+        else if (req.body.metodo === 'digital' /* && (metodoId >= 6 && metodoId <= 10) */) {
+            if ((!herramientas || herramientas.length === 0) || (!programas || programas.length === 0)) {
+                return res.status(400).json({
+                    message: "Debes proporcionar herramientas y programas para este método"
+                });
+            }
+
+            // Manejar herramientas
+            for (const herramienta of herramientas) {
+                const [herr] = await Herramienta.findOrCreate({
+                    where: { nombre: herramienta.nombre },
+                    defaults: herramienta,
+                });
+            }
+
+            // Manejar programas
+            for (const programa of programas) {
+                const [prog] = await Programa.findOrCreate({
+                    where: { nombre: programa.nombre },
+                    defaults: programa,
+                });
+
+                // Relacionar programas con herramientas a través de Pro_herrs
+                if (programa.herramientas && Array.isArray(programa.herramientas)) {
+                    for (const herramientaNombre of programa.herramientas) {
+                        const herramienta = await Herramienta.findOne({
+                            where: { nombre: herramientaNombre },
+                        });
+                        if (herramienta) {
+                            await Pro_Herr.findOrCreate({
+                                where: { metodoId: metodoId.id, programaId: prog.id, herramientaId: herramienta.id },
+                            });
+                        }
+                    }
+                }
+            }
+        } else {
+            // Si metodoId está fuera de los rangos permitidos
+            return res.status(400).json({
+                message: "El método seleccionado no permite materiales ni herramientas y programas"
+            });
+        }
 
         /* console.log(publicacion);
         console.log(req.params.publicoId); */
