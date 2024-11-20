@@ -20,15 +20,15 @@ function addRelationsToModels() {
         Publicacion.belongsTo(Publico, { onDelete: 'CASCADE', onUpdate: 'CASCADE' }) 
         Publico.hasMany(Publicacion)
 
-        
-        Pro_Herr.belongsTo(Metodo, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-        Metodo.hasMany(Pro_Herr)
 
         // Many to many
-        Programa.belongsToMany(Herramienta, { through: Pro_Herr, timestamps: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
-        Herramienta.belongsToMany(Programa, { through: Pro_Herr, timestamps: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+        Programa.belongsToMany(Herramienta, { through: Pro_Herr, foreignKey: 'programaId', otherKey: 'herramientaId', timestamps: false })
+        Herramienta.belongsToMany(Programa, { through: Pro_Herr, foreignKey: 'herramientaId', otherKey: 'programaId', timestamps: false })
 
-       
+        // One to many 
+
+        Pro_Herr.belongsTo(Metodo, { foreignKey: 'metodoId', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+        Metodo.hasMany(Pro_Herr, { foreignKey: 'metodoId', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
        
         // One to One
         Privado.hasOne(Publico, {onDelete: 'CASCADE', onUpdate: 'CASCADE'}) //ESTAR PENDIENTE AL ID DE PRIVADO

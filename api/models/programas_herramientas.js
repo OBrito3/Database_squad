@@ -5,7 +5,12 @@ const { sequelize } = require('../../database')
 const Pro_Herr = sequelize.define(
     'pro_herr',
     {
-        /* programa_id: {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        programaId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -14,7 +19,7 @@ const Pro_Herr = sequelize.define(
             },
         },
 
-        herramienta_id: {
+        herramientaId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
@@ -22,16 +27,16 @@ const Pro_Herr = sequelize.define(
                 key: 'id'   
             }
         },
-        metodo_id: {
+        metodoId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'metodos',
                 key: 'id'
             }
-        } */
+        }
     },
-    { timestamps: false }
+    { timestamps: false, tablename: 'pro_herr' }
 )
 
 module.exports = Pro_Herr

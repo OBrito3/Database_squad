@@ -78,39 +78,35 @@ async function deletePublicacion(req, res) {
 }
 
 // USUARIOS Y ARTISTAS
+
+
 async function createUserPublicacion(req, res) {
     try {
-        // Primero, buscamos el método correspondiente. Aquí buscamos por el 'metodoId' que puede estar en el cuerpo de la solicitud (req.body)
-       /*  const metodoId = req.body.metodoId; // Esto debe venir en el cuerpo de la solicitud o en la URL, según tu implementación
-
-        if (!metodoId) {
-            return res.status(400).json({ message: 'El metodoId es obligatorio' });
+        // Validar que el usuario está autenticado
+        if (!res.locals.privado) {
+            return res.status(401).send("Usuario no autenticado");
         }
 
-        // Buscar el metodo con el metodoId proporcionado
-        const metodo = await Metodo.findByPk(metodoId);
+        const { metodo, categoria_artistica, materiales, herramientas, programas, ...publicacionData } = req.body;
 
-        if (!metodo) {
-            return res.status(400).json({ message: 'Método no encontrado' });
-        } */
-        const { metodoId, materiales, herramientas, programas, ...publicacionData } = req.body;
-        // Verifica si el método existe mediante el 'metodo' y 'categoria_artistica' proporcionados en el cuerpo de la solicitud
-        const metodo = await Metodo.findOne({where: {metodo:req.body.metodo, categoria_artistica:req.body.categoria_artistica}});
-
-        if (!metodo) {
-            return res.status(404).json({ message: 'Método no encontrado' });
-        }
-        // Crear la publicación con el publicoId y metodoId
-        const publicacion = await Publicacion.create({
-            ...publicacionData, // Incluye el resto de los datos de la publicación
-            publicoId: req.params.publicoId, // 'publicoId' lo tomamos de los parámetros de la URL
-            metodoId: metodo.id // Asignamos el 'metodoId' encontrado
+        // Verifica si el método existe mediante 'metodo' y 'categoria_artistica'
+        const metodoEncontrado = await Metodo.findOne({
+            where: { metodo, categoria_artistica }
         });
 
-        // RESTRICCIÓN POR RANGO DE metodoId
+        if (!metodoEncontrado) {
+            return res.status(404).json({ message: "Método no encontrado" });
+        }
 
-        // Si metodo es tradicional, solo se permiten materiales
-        if (req.body.metodo === 'tradicional' /* && (metodoId >= 1 && metodoId <= 5) */) {
+        // Crear la publicación con el metodoId y publicoId
+        const publicacion = await Publicacion.create({
+            ...publicacionData, // Incluye los datos de la publicación
+            metodoId: metodoEncontrado.id, // Usamos el método encontrado
+            publicoId: res.locals.privado.id, // Asociamos al usuario autenticado
+        });
+        // Restricciones por tipo de método
+        if (metodo === "tradicional") {
+            // Si el método es "tradicional", se requieren materiales
             if (!materiales || materiales.length === 0) {
                 return res.status(400).json({ message: "Debes proporcionar materiales para este método" });
             }
@@ -119,67 +115,85 @@ async function createUserPublicacion(req, res) {
             for (const material of materiales) {
                 const [mat] = await Material.findOrCreate({
                     where: { nombre: material.nombre },
-                    defaults: { ...material, metodoId },
+                    defaults: { ...material, metodoId: metodoEncontrado.id },
                 });
 
-                if (mat.metodoId !== metodoId) {
-                    await mat.update({ metodoId });
+                if (mat.metodoId !== metodoEncontrado.id) {
+                    await mat.update({ metodoId: metodoEncontrado.id });
                 }
             }
-        }
-        // Si metodo es digital, solo se permiten herramientas y programas
-        else if (req.body.metodo === 'digital' /* && (metodoId >= 6 && metodoId <= 10) */) {
+        } else if (metodo === "digital") {
+            // Si el método es "digital", se requieren herramientas y programas
             if ((!herramientas || herramientas.length === 0) || (!programas || programas.length === 0)) {
                 return res.status(400).json({
-                    message: "Debes proporcionar herramientas y programas para este método"
+                    message: "Debes proporcionar herramientas y programas para este método",
                 });
             }
-
-            // Manejar herramientas
-            for (const herramienta of herramientas) {
-                const [herr] = await Herramienta.findOrCreate({
-                    where: { nombre: herramienta.nombre },
-                    defaults: herramienta,
-                });
-            }
-
-            // Manejar programas
+            // Manejar programas y herramientas
             for (const programa of programas) {
+                // Crear o encontrar el programa
                 const [prog] = await Programa.findOrCreate({
                     where: { nombre: programa.nombre },
-                    defaults: programa,
+                    defaults: programa, // Esto incluye descripción, marca, tutorial
                 });
 
-                // Relacionar programas con herramientas a través de Pro_herrs
-                if (programa.herramientas && Array.isArray(programa.herramientas)) {
-                    for (const herramientaNombre of programa.herramientas) {
-                        const herramienta = await Herramienta.findOne({
-                            where: { nombre: herramientaNombre },
-                        });
-                        if (herramienta) {
-                            await Pro_Herr.findOrCreate({
-                                where: { metodoId: metodoId.id, programaId: prog.id, herramientaId: herramienta.id },
-                            });
+                if (programa.herramientas && programa.herramientas.length > 0) {
+                    for (const herramienta of programa.herramientas) {
+                        // Validar que la herramienta tenga al menos un nombre
+                        if (!herramienta.nombre) {
+                            console.error("Error: Herramienta sin 'nombre'");
+                            continue; // Pasar a la siguiente herramienta si el nombre no es válido
                         }
+
+                        // Crear o encontrar la herramienta
+                        const [herr] = await Herramienta.findOrCreate({
+                            where: { nombre: herramienta.nombre },
+                            defaults: herramienta, // Esto incluye descripción y marca
+                        });
+
+                        // Crear la relación en la tabla intermedia Pro_Herr
+                        await Pro_Herr.findOrCreate({
+                            where: {
+                                programaId: prog.id,
+                                herramientaId: herr.id,
+                                metodoId: metodoEncontrado.id,
+                            },
+                            defaults: {
+                                programaId: prog.id,
+                                herramientaId: herr.id,
+                                metodoId: metodoEncontrado.id,
+                            },
+                        });
+                        console.log(
+                            `Relación creada: Programa ID ${ prog.id }, Herramienta ID ${ herr.id }, Método ID ${ metodoEncontrado.id }`
+                        );
                     }
                 }
             }
+
+            // Crear herramientas independientes que no estén vinculadas a programas
+            for (const herramienta of herramientas) {
+                if (!herramienta.nombre) continue; // Saltar si no tiene un nombre válido
+
+                await Herramienta.findOrCreate({
+                    where: { nombre: herramienta.nombre },
+                    defaults: herramienta, // Esto incluye descripción y marca
+                });
+            }
         } else {
-            // Si metodoId está fuera de los rangos permitidos
-            return res.status(400).json({
-                message: "El método seleccionado no permite materiales ni herramientas y programas"
-            });
+            // Si el método no es ni "tradicional" ni "digital", devolvemos un error
+            return res.status(400).json({ message: "Tipo de método no reconocido" });
         }
 
-        /* console.log(publicacion);
-        console.log(req.params.publicoId); */
-
-        return res.status(200).json({ message: 'Publicación creada', publicacion: publicacion });
+        // Retorno exitoso
+        return res.status(201).json({ message: "Publicación creada con éxito", publicacion });
     } catch (error) {
-        console.error(error);
-        res.status(500).send(error.message);
+        console.error("Error en createUserPublicacion:", error);
+        return res.status(500).json({ message: "Error interno del servidor", error: error.message });
     }
-}
+};
+
+
 
 
 /* async function updateUserPublicacion(req, res) {
@@ -288,4 +302,3 @@ module.exports = {
     updateUserPublicacion,
     deleteUserPublicacion
 }
-   
