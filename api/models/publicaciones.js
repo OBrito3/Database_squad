@@ -3,7 +3,11 @@ const { sequelize } = require('../../database')
 
 const Publicacion = sequelize.define(
     'publicaciones',
-    {
+    {   
+        imagen: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         contenido: {
             type: DataTypes.TEXT,
             allowNull: false,
