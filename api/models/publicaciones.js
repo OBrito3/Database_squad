@@ -6,7 +6,11 @@ const Publicacion = sequelize.define(
     {   
         imagen: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
+        },
+        titulo: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         contenido: {
             type: DataTypes.TEXT,
@@ -17,13 +21,9 @@ const Publicacion = sequelize.define(
             allowNull: false,
             defaultValue: new Date,
         },
-        categoria: {
-            type: DataTypes.ENUM('tutorial', 'portfolio'),
-            allowNull: false,
-        },
         link: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         }
     },
     { timestamps: false }
