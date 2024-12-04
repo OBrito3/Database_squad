@@ -6,7 +6,7 @@ const Publicacion = sequelize.define(
     {   
         imagen: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         titulo: {
             type: DataTypes.STRING,

@@ -18,7 +18,7 @@ const Material = sequelize.define(
         },
         imagen: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         tutorial: {
             type: DataTypes.STRING,

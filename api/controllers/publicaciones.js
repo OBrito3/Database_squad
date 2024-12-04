@@ -9,7 +9,7 @@ const Pro_Herr = require('../models/programas_herramientas')
 //ADMINS
 async function getAllPublicaciones(req, res) {
     try {
-        const publicaciones = await Publicacion.findAll({ where: req.query })
+        const publicaciones = await Publicacion.findAll({ where: req.query, include: Metodo })
         if (publicaciones) {
             return res.status(200).json(publicaciones)
         } else {

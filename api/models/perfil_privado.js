@@ -31,7 +31,7 @@ const Privado = sequelize.define(
         },
         role:{
             type: DataTypes.ENUM('usuario', 'artista', 'admin'),
-            defaultValue: 'usuario',
+            defaultValue: 'artista',
             allowNull: false,
         }
     },
