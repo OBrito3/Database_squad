@@ -220,7 +220,27 @@ UPDATE publicos
 SET nombre_usuario = 'JohanaAdmin', foto = 'johana.jpg', descripcion = 'Admin de la red social.', rol = 'admin y artista de la escultura'
 WHERE id = 23;
 
-
+INSERT INTO publicaciones (imagen, titulo, contenido, fecha_publicacion, categoria, link, metodoId, publicoId) VALUES
+('https://images.unsplash.com/photo-1585298721195-986ee8f3892c', 'Exploración de texturas en escultura', 'Exploración de diversas texturas en la escultura contemporánea.', '2024-01-06', 'tutorial', 'https://tutorial.com/texturas', 2, 1),
+('https://images.unsplash.com/photo-1573497019415-041d4d7c032b', 'Mis diseños gráficos favoritos', 'Un recorrido por algunos de mis trabajos de diseño gráfico más queridos.', '2024-01-07', 'portfolio', 'https://portfolio.com/disenos', 3, 1),
+('https://images.unsplash.com/photo-1567579786-d1b1ed3a4d92', 'Proyecto personal de modelado 3D', 'Un proyecto donde exploro el modelado 3D con software profesional.', '2024-01-08', 'portfolio', 'https://portfolio.com/modelado', 4, 1),
+('https://images.unsplash.com/photo-1586070500323-32f65b5a31f4', 'Animación básica para principiantes', 'Tutorial sobre cómo realizar animaciones sencillas para iniciarse en la animación digital.', '2024-01-09', 'tutorial', 'https://tutorial.com/animacion', 5, 1),
+('https://images.unsplash.com/photo-1611111298536-035b301b267b', 'Ilustraciones digitales y tradicionales', 'Exploración de mi trabajo en ilustración tanto digital como tradicional.', '2024-01-10', 'portfolio', 'https://portfolio.com/ilustracion', 6, 1),
+('https://images.unsplash.com/photo-1574132576610-cf18b8d06c0f', 'Cómo trabajar con óleo en diseño conceptual', 'Técnicas y consejos sobre el uso del óleo en el arte conceptual.', '2024-01-11', 'tutorial', 'https://tutorial.com/oleo', 2, 1),
+('https://images.unsplash.com/photo-1506418266807-5cf4a278ae8d', 'Grabados para artistas avanzados', 'Un enfoque detallado sobre el grabado como técnica avanzada para artistas.', '2024-01-12', 'portfolio', 'https://portfolio.com/grabados', 3, 1),
+('https://images.unsplash.com/photo-1506489376355-8575db7a6a29', 'Edición de video en programas digitales', 'Guía para principiantes sobre cómo editar videos usando software digital.', '2024-01-13', 'tutorial', 'https://tutorial.com/edicion', 4, 1),
+('https://images.unsplash.com/photo-1529476007987-d0142c22604d', 'Arte conceptual paso a paso', 'Un vistazo al proceso de creación de arte conceptual desde el inicio hasta el final.', '2024-01-14', 'portfolio', 'https://portfolio.com/conceptual', 5, 1),
+('https://images.unsplash.com/photo-1577729930200-4b70bc9d3be9', 'Caligrafía artística en papel', 'Descubre cómo dominar el arte de la caligrafía artística sobre papel.', '2024-01-15', 'tutorial', 'https://tutorial.com/caligrafia', 1, 1),
+('https://images.unsplash.com/photo-1575210998705-dc5a84db18b5', 'Mis proyectos de arte abstracto', 'Exploración de mis obras de arte abstracto, utilizando diferentes técnicas y medios.', '2024-01-16', 'portfolio', 'https://portfolio.com/abstracto', 2, 1),
+('https://images.unsplash.com/photo-1580822190055-9b2b4c8cd7a3', 'Cómo crear bocetos rápidos', 'Una guía práctica para aprender a hacer bocetos rápidos y efectivos.', '2024-01-17', 'tutorial', 'https://tutorial.com/bocetos', 3, 1),
+('https://images.unsplash.com/photo-1565207345-d62b8317e2ff', 'Dibujo técnico en tableta digital', 'Aprende a realizar dibujos técnicos usando una tableta digital.', '2024-01-18', 'tutorial', 'https://tutorial.com/digital', 4, 1),
+('https://images.unsplash.com/photo-1562009580-bbb560022759', 'Galería de arte digital', 'Una muestra de mi trabajo más reciente en el ámbito del arte digital.', '2024-01-19', 'portfolio', 'https://portfolio.com/galeria', 5, 1),
+('https://images.unsplash.com/photo-1572077550153-99ff33d8a3e6', 'Tutorial de escultura para principiantes', 'Un tutorial básico para aquellos que inician su camino en el arte de la escultura.', '2024-01-20', 'tutorial', 'https://tutorial.com/escultura', 2, 1),
+('https://images.unsplash.com/photo-1576877925317-e5fae01eaf9f', 'Ilustración digital avanzada', 'Aprende técnicas avanzadas para crear ilustraciones digitales con efectos impresionantes.', '2024-01-21', 'portfolio', 'https://portfolio.com/ilustracion-avanzada', 6, 1),
+('https://images.unsplash.com/photo-1525205745866-19f243d1b3b0', 'Escultura digital en 3D', 'Un tutorial sobre cómo realizar esculturas en 3D usando software digital.', '2024-01-22', 'tutorial', 'https://tutorial.com/escultura-digital', 7, 1),
+('https://images.unsplash.com/photo-1527175472034-b145256da99a', 'Diseño gráfico digital', 'Cómo el diseño gráfico ha evolucionado con las herramientas digitales.', '2024-01-23', 'portfolio', 'https://portfolio.com/diseno-digital', 8, 1),
+('https://images.unsplash.com/photo-1601284015471-542b6a080046', 'Ilustración digital creativa', 'Exploración de nuevas técnicas para la ilustración digital creativa.', '2024-01-24', 'portfolio', 'https://portfolio.com/ilustracion-creativa', 6, 1),
+('https://images.unsplash.com/photo-1601767871989-b7b6d8ea5fe1', 'Diseño digital y creatividad', 'Una mirada a cómo las herramientas digitales pueden impulsar la creatividad en el diseño.', '2024-01-25', 'portfolio', 'https://portfolio.com/diseno-creativo', 6, 1);
 
 
 INSERT INTO publicaciones (contenido, fecha_publicacion, categoria, link, metodoId, publicoId) VALUES
