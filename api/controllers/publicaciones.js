@@ -16,6 +16,10 @@ async function getAllPublicaciones(req, res) {
         {
           model: Metodo,
           attributes: ["metodo"],
+          include: {
+            model: Material,
+            attributes: ["nombre"],
+          },
         },
         {
           model: Publico,
@@ -102,7 +106,6 @@ async function deletePublicacion(req, res) {
 
 async function createUserPublicacion(req, res) {
   try {
-     
     // Validar que el usuario está autenticado
     if (!res.locals.privado) {
       return res.status(401).send("Usuario no autenticado");

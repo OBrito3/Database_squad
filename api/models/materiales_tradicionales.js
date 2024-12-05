@@ -22,7 +22,7 @@ const Material = sequelize.define(
         },
         tutorial: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         }
      },
     { timestamps: false }
