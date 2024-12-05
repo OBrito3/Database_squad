@@ -14,7 +14,7 @@ const signup = async (req, res) => {
 
         const payload = { email: req.body.email };
         const token = jwt.sign(payload, process.env.TOKEN_WORD, { expiresIn: process.env.EXPIRES });
-        res.status(200).json({ token, role: privado.role, usuario: privado.email });
+        res.status(200).json({ token, role: privado.role, usuario: privado.email, publicoId: publico.id });
     } catch (error) {
         return res.status(500).send(error.message);
     }
@@ -26,6 +26,10 @@ const login = async (req, res) => {
             where: { email: req.body.email },
         });
 
+         const publico = await Publico.findOne({
+           where: { privadoId: privado.id },
+         });
+
         if (!privado) return res.status(400).send("Error: usuario no encontrado");
 
         const comparePass = bcrypt.compareSync(req.body.password, privado.password);
@@ -33,7 +37,7 @@ const login = async (req, res) => {
         if (comparePass) {
             const payload = { email: privado.email };
             const token = jwt.sign(payload, process.env.TOKEN_WORD, { expiresIn: process.env.EXPIRES });
-            return res.status(200).json({ token, role: privado.role, usuario: privado.nombre });
+            return res.status(200).json({ token, role: privado.role, usuario: privado.nombre, publicoId: publico.id });
         } else {
             return res.status(404).send("Error: comprueba los datos introducidos");
         }
