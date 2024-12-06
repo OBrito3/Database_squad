@@ -119,10 +119,10 @@ async function createUserPublicacion(req, res) {
       programas,
       ...publicacionData
     } = req.body;
-
+    console.log(req.body)
     // Verifica si el método existe mediante 'metodo' y 'categoria_artistica'
     const metodoEncontrado = await Metodo.findOne({
-      where: { metodo, categoria_artistica },
+      where: { metodo: metodo, categoria_artistica: categoria_artistica },
     });
 
     if (!metodoEncontrado) {

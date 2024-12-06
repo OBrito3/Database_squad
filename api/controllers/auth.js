@@ -29,7 +29,7 @@ const login = async (req, res) => {
          const publico = await Publico.findOne({
            where: { privadoId: privado.id },
          });
-
+         console.log(publico)
         if (!privado) return res.status(400).send("Error: usuario no encontrado");
 
         const comparePass = bcrypt.compareSync(req.body.password, privado.password);
