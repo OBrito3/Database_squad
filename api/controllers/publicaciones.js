@@ -16,10 +16,12 @@ async function getAllPublicaciones(req, res) {
         {
           model: Metodo,
           attributes: ["metodo"],
-          include: {
-            model: Material,
-            attributes: ["nombre"],
-          },
+          include: [
+            {
+              model: Material,
+              attributes: ["nombre"], // Get materials related to the method
+            },
+          ],
         },
         {
           model: Publico,
@@ -223,11 +225,16 @@ async function createUserPublicacion(req, res) {
       // Si el método no es ni "tradicional" ni "digital", devolvemos un error
       return res.status(400).json({ message: "Tipo de método no reconocido" });
     }
+       // **ADDITION: After handling materials, fetch associated materials for the response**
+      const associatedMaterials = await Material.findAll({
+      where: { metodoId: metodoEncontrado.id },
+      attributes: ["id", "nombre"],
+    });
 
     // Retorno exitoso
     return res
       .status(201)
-      .json({ message: "Publicación creada con éxito", publicacion });
+      .json({ message: "Publicación creada con éxito", publicacion, materiales: associatedMaterials}); // **Include associated materials in the response**
   } catch (error) {
     console.error("Error en createUserPublicacion:", error);
     return res
