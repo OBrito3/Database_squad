@@ -39,6 +39,41 @@ Material.belongsTo(Publicacion, { foreignKey: "publicacionId", as: "publicacion"
         Privado.hasOne(Publico, {onDelete: 'CASCADE', onUpdate: 'CASCADE'}) //ESTAR PENDIENTE AL ID DE PRIVADO
         Publico.belongsTo(Privado)
 
+
+
+
+        // PRUEBA
+// Relación de herramientas y programas con publicaciones a través de la tabla intermedia
+Publicacion.belongsToMany(Herramienta, {
+    through: Pro_Herr,
+    foreignKey: "publicacionId",
+    otherKey: "herramientaId",
+    as: "herramientas",
+  });
+  Herramienta.belongsToMany(Publicacion, {
+    through: Pro_Herr,
+    foreignKey: "herramientaId",
+    otherKey: "publicacionId",
+    as: "publicaciones",
+  });
+  
+  Publicacion.belongsToMany(Programa, {
+    through: Pro_Herr,
+    foreignKey: "publicacionId",
+    otherKey: "programaId",
+    as: "programas",
+  });
+  Programa.belongsToMany(Publicacion, {
+    through: Pro_Herr,
+    foreignKey: "programaId",
+    otherKey: "publicacionId",
+    as: "publicaciones",
+  });
+  
+
+
+
+
         console.log('Relations added to all models')
     } catch (error) {
         throw error
