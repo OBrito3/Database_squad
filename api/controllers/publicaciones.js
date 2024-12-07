@@ -15,13 +15,12 @@ async function getAllPublicaciones(req, res) {
       include: [
         {
           model: Metodo,
-          attributes: ["metodo"],
-          include: [
-            {
-              model: Material,
-              attributes: ["nombre"], // Get materials related to the method
-            },
-          ],
+          attributes: ["metodo", "categoria_artistica"],
+        },
+        {
+          model: Material,
+          attributes: ["nombre", "descripcion", "marca"], // Asegúrate de los campos que necesitas
+          as: "materiales", // Usa el alias definido en la relación
         },
         {
           model: Publico,
@@ -42,6 +41,7 @@ async function getAllPublicaciones(req, res) {
     res.status(500).send(error.message);
   }
 }
+
 
 async function getOnePublicacion(req, res) {
   try {
@@ -147,19 +147,51 @@ async function createUserPublicacion(req, res) {
       }
 
       // Manejar materiales
-      for (const material of materiales) {
+      /*for (const material of materiales) {
         const [mat] = await Material.findOrCreate({
           where: { nombre: material.nombre },
           defaults: { ...material, metodoId: metodoEncontrado.id },
-        });
-
-        if (mat.metodoId !== metodoEncontrado.id) {
-          await mat.update({ metodoId: metodoEncontrado.id });
+        }); RECORDAD QUE ESTO PERMITE NO DUPLICAR MATERIALES ASÍ QUE MÁS ADELANTE SE PUEDE IMPLEMENTAR MEJOR*/
+        for (const material of materiales) {
+          await Material.create({
+            ...material,
+            metodoId: metodoEncontrado.id,
+            publicacionId: publicacion.id, // Asociar el material a la publicación
+          });
         }
       }
-    } else if (metodo === "digital") {
+
+       /* if (mat.metodoId !== metodoEncontrado.id) {
+          await mat.update({ metodoId: metodoEncontrado.id });
+        }
+      }*/
+// Manejar herramientas y programas si el método es "digital" (similar lógica a lo existente)
+
+
+
+     if (metodo === "digital") {
       // Si el método es "digital", se requieren herramientas y programas
-      if (
+     } 
+    // Obtener los materiales asociados para incluirlos en la respuesta
+    const materialesAsociados = await Material.findAll({
+      where: { publicacionId: publicacion.id },
+      attributes: ["id", "nombre", "descripcion", "marca"],
+    });
+
+    return res.status(201).json({
+      message: "Publicación creada con éxito",
+      publicacion,
+      materiales: materialesAsociados,
+    });
+  } catch (error) {
+    console.error("Error en createUserPublicacion:", error);
+    return res.status(500).json({ message: "Error interno del servidor", error: error.message });
+  }
+}
+    
+    
+/* DESDE AQUÍ TODO LO QUE ESTÁ COMENTADO VOLVER A DESCOMENTAR    
+       if (
         !herramientas ||
         herramientas.length === 0 ||
         !programas ||
@@ -170,6 +202,8 @@ async function createUserPublicacion(req, res) {
             "Debes proporcionar herramientas y programas para este método",
         });
       }
+
+
       // Manejar programas y herramientas
       for (const programa of programas) {
         // Crear o encontrar el programa
@@ -242,6 +276,7 @@ async function createUserPublicacion(req, res) {
       .json({ message: "Error interno del servidor", error: error.message });
   }
 }
+*/
 
 /* async function updateUserPublicacion(req, res) {
     try {
