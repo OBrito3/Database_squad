@@ -25,6 +25,11 @@ function addRelationsToModels() {
         Programa.belongsToMany(Herramienta, { through: Pro_Herr, foreignKey: 'programaId', otherKey: 'herramientaId', timestamps: false })
         Herramienta.belongsToMany(Programa, { through: Pro_Herr, foreignKey: 'herramientaId', otherKey: 'programaId', timestamps: false })
 
+        
+        Publicacion.hasMany(Material, { foreignKey: "publicacionId", as: "materiales" });
+Material.belongsTo(Publicacion, { foreignKey: "publicacionId", as: "publicacion" });
+
+
         // One to many 
 
         Pro_Herr.belongsTo(Metodo, { foreignKey: 'metodoId', onDelete: 'CASCADE', onUpdate: 'CASCADE' })
