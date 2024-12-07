@@ -23,6 +23,18 @@ async function getAllPublicaciones(req, res) {
           as: "materiales", // Usa el alias definido en la relación
         },
         {
+          model: Herramienta,
+          through: { attributes: [] },
+          as: "herramientas",
+          attributes: ["nombre", "descripcion", "marca"],
+        },
+        {
+          model: Programa,
+          through: { attributes: [] },
+          as: "programas",
+          attributes: ["nombre", "descripcion", "marca"],
+        },
+        {
           model: Publico,
           attributes: ["privadoId"],
           include: {
@@ -168,25 +180,103 @@ async function createUserPublicacion(req, res) {
 // Manejar herramientas y programas si el método es "digital" (similar lógica a lo existente)
 
 
-
-     if (metodo === "digital") {
-      // Si el método es "digital", se requieren herramientas y programas
-     } 
-    // Obtener los materiales asociados para incluirlos en la respuesta
-    const materialesAsociados = await Material.findAll({
-      where: { publicacionId: publicacion.id },
-      attributes: ["id", "nombre", "descripcion", "marca"],
+ // Caso método digital: manejar herramientas y programas
+ if (metodo === "digital") {
+  if (!herramientas || !programas) {
+    return res.status(400).json({
+      message: "Debes proporcionar herramientas y programas para este método",
     });
-
-    return res.status(201).json({
-      message: "Publicación creada con éxito",
-      publicacion,
-      materiales: materialesAsociados,
-    });
-  } catch (error) {
-    console.error("Error en createUserPublicacion:", error);
-    return res.status(500).json({ message: "Error interno del servidor", error: error.message });
   }
+  
+
+  for (const programa of programas) {
+    const [prog] = await Programa.findOrCreate({
+      where: { nombre: programa.nombre },
+      defaults: programa, // Incluye descripción, marca, etc.
+    });
+
+    if (programa.herramientas && programa.herramientas.length > 0) {
+      for (const herramienta of programa.herramientas) {
+        const [herr] = await Herramienta.findOrCreate({
+          where: { nombre: herramienta.nombre },
+          defaults: herramienta, // Incluye descripción y marca
+        });
+
+        // Relación programa-herramienta-publicación
+        await Pro_Herr.findOrCreate({
+          where: {
+            programaId: prog.id,
+            herramientaId: herr.id,
+            metodoId: metodoEncontrado.id,
+            publicacionId: publicacion.id,
+          },
+          defaults: {
+            programaId: prog.id,
+            herramientaId: herr.id,
+            metodoId: metodoEncontrado.id,
+            publicacionId: publicacion.id,
+          },
+        });
+      }
+    }
+  }
+
+  for (const herramienta of herramientas) {
+    const [herr] = await Herramienta.findOrCreate({
+      where: { nombre: herramienta.nombre },
+      defaults: herramienta,
+    });
+
+    await Pro_Herr.findOrCreate({
+      where: {
+        herramientaId: herr.id,
+        metodoId: metodoEncontrado.id,
+        publicacionId: publicacion.id,
+      },
+      defaults: {
+        herramientaId: herr.id,
+        metodoId: metodoEncontrado.id,
+        publicacionId: publicacion.id,
+      },
+    });
+  }
+}
+
+// Obtener datos completos para la respuesta
+const materialesAsociados = await Material.findAll({
+  where: { publicacionId: publicacion.id },
+  attributes: ["id", "nombre", "descripcion", "marca"],
+});
+
+const herramientasAsociadas = await Herramienta.findAll({
+  include: {
+    model: Pro_Herr,
+    where: { publicacionId: publicacion.id },
+    attributes: [],
+  },
+  attributes: ["id", "nombre", "descripcion", "marca"],
+});
+
+const programasAsociados = await Programa.findAll({
+  include: {
+    model: Pro_Herr,
+    where: { publicacionId: publicacion.id },
+    attributes: [],
+  },
+  attributes: ["id", "nombre", "descripcion", "marca"],
+});
+
+return res.status(201).json({
+  message: "Publicación creada con éxito",
+  publicacion,
+  materiales: materialesAsociados,
+  herramientas: herramientasAsociadas,
+  programas: programasAsociados,
+});
+} catch (error) {
+console.error("Error en createUserPublicacion:", error);
+return res.status(500).json({ message: "Error interno del servidor", error: error.message });
+}
 }
     
     
