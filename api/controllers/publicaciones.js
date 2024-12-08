@@ -22,7 +22,7 @@ async function getAllPublicaciones(req, res) {
           attributes: ["nombre", "descripcion", "marca"], // Asegúrate de los campos que necesitas
           as: "materiales", // Usa el alias definido en la relación
         },
-        {
+/*         {
           model: Herramienta,
           through: { attributes: [] },
           as: "herramientas",
@@ -33,7 +33,7 @@ async function getAllPublicaciones(req, res) {
           through: { attributes: [] },
           as: "programas",
           attributes: ["nombre", "descripcion", "marca"],
-        },
+        }, */
         {
           model: Publico,
           attributes: ["privadoId"],
