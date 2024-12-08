@@ -7,7 +7,7 @@ const { getAllPerfilesPublicos, getOnePerfilPublico, createPerfilPublico, update
 //ADMINS
 
 router.get('/', checkAuth, checkAdmin, getAllPerfilesPublicos)
-router.get('/:id', checkAuth, checkAdmin, getOnePerfilPublico)
+router.get('/:id', checkAuth, getOnePerfilPublico) //quitamos checkAdmin de aquí
 router.post('/', checkAuth, checkAdmin, createPerfilPublico)
 router.put('/:id', checkAuth, checkAdmin, updatePerfilPublico)
 router.delete('/:id', checkAuth, checkAdmin, deletePerfilPublico)  
